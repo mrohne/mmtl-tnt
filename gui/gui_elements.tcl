@@ -1130,7 +1130,7 @@ proc ::gui::_putDielectricLayerToFile { nme fp } {
     set permeability  [$nme cget -permeability]
     set lossTangent   [$nme cget -lossTangent]
     puts $fp "$nme: DielectricLayer"
-    puts $fp " thikkckness   : $thickness"
+    puts $fp " thickness   : $thickness"
     puts $fp " permittivity: $permittivity"
     puts $fp " permeability: $permeability"
     puts $fp " lossTangent : $lossTangent"

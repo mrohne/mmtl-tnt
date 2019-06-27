@@ -50,8 +50,8 @@ package provide csdl 1.0.1
 #
 # --------------------------------------------------------------------
 itcl::class Structure {
-    public variable x 0
-    public variable y 0
+    public variable x 0.0
+    public variable y 0.0
     public variable shape
     public variable description
     method width {} {$shape width}
@@ -62,8 +62,10 @@ itcl::class Structure {
 	$visitor visit$myClass $this $x $y
 
 	#  Navigate to the structure(s)
+	set x0 [length $x]
+	set y0 [length $y]
 	foreach obj $shape {
-	    $obj accept $visitor $x $y
+	    $obj accept $visitor $x0 $y0
 	}
     }
 }
