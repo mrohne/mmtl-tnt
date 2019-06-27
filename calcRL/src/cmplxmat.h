@@ -10,8 +10,8 @@
 class CmplxMatrix
 {
   friend class Matrix;
-  friend ostream& operator<<(ostream&, const CmplxMatrix&);
-  friend istream& operator>>(istream&, CmplxMatrix&);
+  friend std::ostream& operator<<(std::ostream&, const CmplxMatrix&);
+  friend std::istream& operator>>(std::istream&, CmplxMatrix&);
 
 public:
 
@@ -131,7 +131,7 @@ inline int CmplxMatrix::operator==(const CmplxMatrix& x) const {
 inline CmplxVector& CmplxMatrix::row(int i) const {
 
   if (i < 0 || i >= d_i) {  
-    cerr << "complex matrix: row index out of range" << endl;
+    std::cerr << "complex matrix: row index out of range" << std::endl;
     exit(1);
   }
   return (*v[i]);
@@ -140,11 +140,11 @@ inline CmplxVector& CmplxMatrix::row(int i) const {
 inline Complex& CmplxMatrix::operator()(int i, int j) {
 
   if (i < 0 || i >= d_i) { 
-    cerr << "complex matrix: row index out of range" << endl;
+    std::cerr << "complex matrix: row index out of range" << std::endl;
     exit(1);
   }
   if (j < 0 || j >= d_j) { 
-    cerr << "complex matrix: col index out of range" << endl;
+    std::cerr << "complex matrix: col index out of range" << std::endl;
     exit(1);
   }
   return (elem(i,j));
@@ -153,11 +153,11 @@ inline Complex& CmplxMatrix::operator()(int i, int j) {
 inline Complex& CmplxMatrix::operator()(int i, int j) const {
 
   if (i < 0 || i >= d_i) { 
-    cerr << "complex matrix: row index out of range" << endl;
+    std::cerr << "complex matrix: row index out of range" << std::endl;
     exit(1);
   }
   if (j < 0 || j >= d_j) { 
-    cerr << "complex matrix: col index out of range" << endl;
+    std::cerr << "complex matrix: col index out of range" << std::endl;
     exit(1);
   }
   return (elem(i,j));
@@ -166,7 +166,7 @@ inline Complex& CmplxMatrix::operator()(int i, int j) const {
 inline CmplxVector CmplxMatrix::col(int i) const {
  
   if (i < 0 || i >= d_j) {  
-    cerr << "complex matrix: col index out of range" << endl;
+    std::cerr << "complex matrix: col index out of range" << std::endl;
     exit(1);
   }
   CmplxVector result(d_i);
@@ -178,7 +178,7 @@ inline CmplxVector CmplxMatrix::col(int i) const {
 inline CmplxMatrix::operator CmplxVector() const {
 
   if (d_j != 1) { 
-    cerr << "error: cannot make complex vector from complex matrix" << endl;
+    std::cerr << "error: cannot make complex vector from complex matrix" << std::endl;
     exit(1);
   }
   return (col(0));
@@ -199,7 +199,7 @@ inline CmplxMatrix CmplxMatrix::operator+(const Matrix& mat) {
 
   int i, j;
   if (d_i != mat.dim_i() || d_j != mat.dim_j()) {
-    cerr << "incompatible complex matrix types. +" << endl;
+    std::cerr << "incompatible complex matrix types. +" << std::endl;
     exit(1);
   }
   CmplxMatrix result(d_i,d_j);
@@ -225,7 +225,7 @@ inline CmplxMatrix CmplxMatrix::operator-(const Matrix& mat) {
 
   int i, j;
   if (d_i != mat.dim_i() || d_j != mat.dim_j()) {
-    cerr << "incompatible complex matrix types in -." << endl;
+    std::cerr << "incompatible complex matrix types in -." << std::endl;
     exit(1);
   }
   CmplxMatrix result(d_i,d_j);
@@ -289,7 +289,7 @@ inline CmplxMatrix CmplxMatrix::operator*(const Complex& f) {
 inline CmplxMatrix CmplxMatrix::operator*(const Matrix& mat) {
 
   if (d_j != mat.dim_i()) {
-    cerr << "complex matrix: incompatible matrix types" << endl;
+    std::cerr << "complex matrix: incompatible matrix types" << std::endl;
     exit(1);
   }
   CmplxMatrix result(d_i, mat.dim_j());
@@ -302,7 +302,7 @@ inline CmplxMatrix CmplxMatrix::operator*(const Matrix& mat) {
 inline CmplxMatrix CmplxMatrix::operator*(const CmplxMatrix& mat) {
 
   if (d_j != mat.d_i) {
-    cerr << "complex matrix: incompatible matrix types" << endl;
+    std::cerr << "complex matrix: incompatible matrix types" << std::endl;
     exit(1);
   }
   CmplxMatrix result(d_i, mat.d_j);
@@ -315,7 +315,7 @@ inline CmplxMatrix CmplxMatrix::operator*(const CmplxMatrix& mat) {
 inline CmplxMatrix CmplxMatrix::operator/(double a) {
  
   if (a==0) {
-    cerr << "complex matrix: divided by zero" << endl;
+    std::cerr << "complex matrix: divided by zero" << std::endl;
     exit(1);
   }
   a = 1. / a;
@@ -325,7 +325,7 @@ inline CmplxMatrix CmplxMatrix::operator/(double a) {
 inline CmplxMatrix CmplxMatrix::operator/(const Complex& a) {
 
   if (a==0) { 
-    cerr << "complex matrix:  divided by zero" << endl;
+    std::cerr << "complex matrix:  divided by zero" << std::endl;
     exit(1);
   }
   Complex tmp = 1. / a;
@@ -343,7 +343,7 @@ inline void CmplxMatrix::free()
 inline void CmplxMatrix::check_dimensions(const CmplxMatrix& mat) const {
 
   if (d_i != mat.d_i || d_j != mat.d_j) {
-    cerr << "incompatible complex matrix types." << endl;
+    std::cerr << "incompatible complex matrix types." << std::endl;
     exit(1);
   }
 }
@@ -355,6 +355,6 @@ inline void CmplxMatrix::flip_rows(int i,int j) {
   v[j] = p;
 }
 
-inline void Print(const CmplxMatrix& m, ostream& out=cout) { out << m; }
-inline void Read(CmplxMatrix& m, istream& in=cin)          { in >> m;  }
+inline void Print(const CmplxMatrix& m, std::ostream& out=std::cout) { out << m; }
+inline void Read(CmplxMatrix& m, std::istream& in=std::cin)          { in >> m;  }
 #endif

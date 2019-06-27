@@ -4,14 +4,12 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace std;
-
 class Vector
 {
   friend class Matrix;
   friend class Matrix3d;
-  friend ostream& operator<<(ostream&, const Vector&);
-  friend istream& operator>>(istream&, Vector&);
+  friend std::ostream& operator<<(std::ostream&, const Vector&);
+  friend std::istream& operator>>(std::istream&, Vector&);
   friend Vector operator*(double, const Vector&);
   friend double max(const Vector&);
   friend double min(const Vector&);
@@ -58,8 +56,8 @@ private:
   int     d;
 };
 
-inline void Print(const Vector& v, ostream& out=cout) { out << v; }
-inline void Read(Vector& v, istream& in=cin)          { in >> v;  }
+inline void Print(const Vector& v, std::ostream& out=std::cout) { out << v; }
+inline void Read(Vector& v, std::istream& in=std::cin)          { in >> v;  }
 //inline double MAX(double x,double y)                  { return (x > y ? x : y); }
 
 double norm(const Vector& v);

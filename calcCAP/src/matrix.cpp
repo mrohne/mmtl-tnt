@@ -70,7 +70,7 @@ void Matrix::free() {
 void Matrix::check_dimensions(const Matrix& mat) const {
 
   if (d_i != mat.d_i || d_j != mat.d_j) {
-    cerr << "Matrix:incompatible matrix types." << endl;
+    std::cerr << "Matrix:incompatible matrix types." << std::endl;
     exit(1);
   }
 }
@@ -105,7 +105,7 @@ int Matrix::operator==(const Matrix& x) const {
 Vector& Matrix::row(int i) const {
 
   if (i < 0 || i >= d_i)  {
-    cerr << "Matrix: row index out of range" << endl;
+    std::cerr << "Matrix: row index out of range" << std::endl;
     exit(1);
   }
   return (*v[i]);
@@ -114,11 +114,11 @@ Vector& Matrix::row(int i) const {
 double& Matrix::operator()(int i, int j) {
 
   if (i < 0 || i >= d_i) {
-    cerr << "Matrix: row index out of range" << endl;
+    std::cerr << "Matrix: row index out of range" << std::endl;
     exit(1);
   }
   if (j < 0 || j >= d_j) {
-    cerr << "Matrix: col index out of range" << endl;
+    std::cerr << "Matrix: col index out of range" << std::endl;
     exit(1);
   }
   return (elem(i,j));
@@ -127,11 +127,11 @@ double& Matrix::operator()(int i, int j) {
 double& Matrix::operator()(int i, int j) const {
 
   if (i < 0 || i >= d_i) {
-    cerr << "Matrix: row index out of range" << endl;
+    std::cerr << "Matrix: row index out of range" << std::endl;
     exit(1);
   }
   if (j < 0 || j >= d_j) {
-    cerr << "Matrix: col index out of range" << endl;
+    std::cerr << "Matrix: col index out of range" << std::endl;
     exit(1);
   }
   return (elem(i,j));
@@ -140,7 +140,7 @@ double& Matrix::operator()(int i, int j) const {
 Vector Matrix::col(int i)  const {
 
   if (i < 0 || i >= d_j) {
-    cerr << "Matrix: col index out of range" << endl;
+    std::cerr << "Matrix: col index out of range" << std::endl;
     exit(1);
   }
   Vector result(d_i);
@@ -152,7 +152,7 @@ Vector Matrix::col(int i)  const {
 Vector Matrix::diag()  const {
 
   if (d_i != d_j) {
-    cerr << "Matrix: diag defined only if d_i = d_j" << endl;
+    std::cerr << "Matrix: diag defined only if d_i = d_j" << std::endl;
     exit(1);
   }
   Vector result(d_i);
@@ -164,7 +164,7 @@ Vector Matrix::diag()  const {
 Matrix::operator Vector() const {
 
   if (d_j != 1) {
-    cerr << "error: cannot make vector from matrix" << endl;
+    std::cerr << "error: cannot make vector from matrix" << std::endl;
     exit(1);
   }
   return (col(0));
@@ -226,7 +226,7 @@ Matrix& Matrix::operator/=(double x) {
 
   int i, j;
   if (x == 0) {
-    cerr << "Matrix/=: divided by zero" << endl;
+    std::cerr << "Matrix/=: divided by zero" << std::endl;
     exit(1);
   }
   for(i = 0; i < d_i; i++)
@@ -267,7 +267,7 @@ Matrix Matrix::operator*(double f) const {
 Matrix Matrix::operator*(const Matrix& mat) {
 
   if (d_j != mat.d_i) {
-    cerr << "matrix multiplication: incompatible matrix types" << endl;
+    std::cerr << "matrix multiplication: incompatible matrix types" << std::endl;
     exit(1);
   }
   Matrix result(d_i, mat.d_j);
@@ -280,7 +280,7 @@ Matrix Matrix::operator*(const Matrix& mat) {
 Matrix Matrix::operator/(double a) {
 
   if(a == 0) {
-    cerr << "Matrix: divided by zero" << endl;
+    std::cerr << "Matrix: divided by zero" << std::endl;
     exit(1);
   }
   a = 1. / a;
@@ -291,7 +291,7 @@ Matrix Matrix::operator/(double a) {
 Matrix Matrix::operator^(const Matrix& mat) const {
 
   if (d_i != mat.d_i || d_j != mat.d_j) {
-    cerr << "Matrix=: matrixes have different sizes" << endl;
+    std::cerr << "Matrix=: matrixes have different sizes" << std::endl;
     exit(1);
   }
   Matrix res(d_i,d_j); 
@@ -343,19 +343,19 @@ Matrix& Matrix::zeros() {
 
 /***************************** friends **************************/
 
-ostream& operator<<(ostream& s, const Matrix& M) {
+std::ostream& operator<<(std::ostream& s, const Matrix& M) {
   //int i;
   //for (i = 0; i < M.d_i; i++) s << M[i]; 
   
   int i,j;
   for(j=0; j < M.d_j; j++)
      for(i=0; i < M.d_i; i++)
-       s << " [" << i << "][" << j << "] = " << M[i][j]<< endl;   
+       s << " [" << i << "][" << j << "] = " << M[i][j]<< std::endl;   
   
   return (s);
 }
 
-istream& operator>>(istream& s, Matrix& M) {
+std::istream& operator>>(std::istream& s, Matrix& M) {
 
   int i = 0;
   while (i < M.d_i && s >> M[i++]);

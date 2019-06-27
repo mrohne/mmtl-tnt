@@ -70,7 +70,7 @@ void Matrix::free() {
 void Matrix::check_dimensions(const Matrix& mat) const {
 
   if (d_i != mat.d_i || d_j != mat.d_j) {
-    cerr << "Matrix:incompatible matrix types." << endl;
+    std::cerr << "Matrix:incompatible matrix types." << std::endl;
     exit(1);
   }
 }
@@ -102,19 +102,19 @@ Matrix& Matrix::resize(int new_d_i, int new_d_j) {
 
 /***************************** friends **************************/
 
-ostream& operator<<(ostream& s, const Matrix& M) {
+std::ostream& operator<<(std::ostream& s, const Matrix& M) {
   //int i;
   //for (i = 0; i < M.d_i; i++) s << M[i]; 
   
   int i,j;
   for(j=0; j < M.d_j; j++)
      for(i=0; i < M.d_i; i++)
-       s << " [" << i << "][" << j << "] = " << M[i][j]<< endl;   
+       s << " [" << i << "][" << j << "] = " << M[i][j]<< std::endl;   
   
   return (s);
 }
 
-istream& operator>>(istream& s, Matrix& M) {
+std::istream& operator>>(std::istream& s, Matrix& M) {
 
   int i = 0;
   while (i < M.d_i && s >> M[i++]);

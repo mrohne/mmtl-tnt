@@ -8,7 +8,7 @@
 IVectorl::IVectorl(int n)  {
 
   if (n < 0) {
-    cerr << "IVectorl: negative dimension." << endl;
+    std::cerr << "IVectorl: negative dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -22,7 +22,7 @@ IVectorl::IVectorl(int n)  {
 IVectorl::IVectorl(int n, int v0) {
 
   if (n <= 0) {
-    cerr << "IVectorl: undefined dimension." << endl;
+    std::cerr << "IVectorl: undefined dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -45,7 +45,7 @@ IVectorl::IVectorl(const IVectorl& v0) {
 int IVectorl::operator[](int i) const {
 
   if (i < 0 || i > d - 1) {
-    cerr << "IVectorl: index " << i << " out of range" << endl;
+    std::cerr << "IVectorl: index " << i << " out of range" << std::endl;
     exit(1);
   }
   return (v[i]);
@@ -54,7 +54,7 @@ int IVectorl::operator[](int i) const {
 int& IVectorl::operator[](int i) {
 
   if (i < 0 || i > d - 1) {
-    cerr << "IVectorl: index " << i << " out of range" << endl;
+    std::cerr << "IVectorl: index " << i << " out of range" << std::endl;
     exit(1);
   }
   return (v[i]);
@@ -65,7 +65,7 @@ IVectorl IVectorl::operator+(const IVectorl& vec) const {
   IVectorl result(d);
   int n = d;
   if (d != vec.d) {
-    cerr << "IVectorl+: IVectorls have different length" << endl;
+    std::cerr << "IVectorl+: IVectorls have different length" << std::endl;
     exit(1);
   }
   while (n--) result.v[n] = v[n] + vec.v[n];
@@ -77,7 +77,7 @@ IVectorl IVectorl::operator-(const IVectorl& vec) const {
   IVectorl result(d);
   int n = d;
   if (d != vec.d) {
-    cerr << "IVectorl-: IVectorls have different length" << endl;
+    std::cerr << "IVectorl-: IVectorls have different length" << std::endl;
     exit(1);
   }
   while (n--) result.v[n] = v[n] - vec.v[n];
@@ -104,7 +104,7 @@ IVectorl& IVectorl::operator+=(const IVectorl& vec) {
 
   int n = d;
   if (d != vec.d) {
-    cerr << "IVectorl+=: IVectorls have different length" << endl;
+    std::cerr << "IVectorl+=: IVectorls have different length" << std::endl;
     exit(1);
   }
   while (n--) v[n] += vec.v[n];
@@ -115,7 +115,7 @@ IVectorl& IVectorl::operator-=(const IVectorl& vec) {
 
   int n = d;
   if (d != vec.d) {
-    cerr << "IVectorl-=: IVectorls have different length" << endl;
+    std::cerr << "IVectorl-=: IVectorls have different length" << std::endl;
     exit(1);
   }
   while (n--) v[n] -= vec.v[n];
@@ -133,7 +133,7 @@ IVectorl IVectorl::operator-() const {
 int IVectorl::operator*(const IVectorl& vec) const {
 
   if (d != vec.d) {
-    cerr << "IVectorl*: IVectorls have different length" << endl;
+    std::cerr << "IVectorl*: IVectorls have different length" << std::endl;
     exit(1);
   }
   int result  = 0;
@@ -147,7 +147,7 @@ IVectorl& IVectorl::operator=(const IVectorl& vec) {
   //if (this != &vec) {
   //int n = vec.d;
   //if (d != vec.d) {
-  //cerr << "IVectorl=: IVectorls have different length" << endl;
+  //std::cerr << "IVectorl=: IVectorls have different length" << std::endl;
   //exit(1);
   //}
   //while (n--) v[n] = vec.v[n];
@@ -207,11 +207,11 @@ IVectorl& IVectorl::resize(int nn) {
 
 /**************        friends        *********************/
 
-ostream& operator<<(ostream& out, const IVectorl& v) {
+std::ostream& operator<<(std::ostream& out, const IVectorl& v) {
 
   for (int i = 0; i < v.d; i++)
-    //out << v.v[i] << ' ' << endl;
-    out << " [" << i << "] = " << v.v[i] << ' ' << endl;
+    //out << v.v[i] << ' ' << std::endl;
+    out << " [" << i << "] = " << v.v[i] << ' ' << std::endl;
   return (out);
 }
 
@@ -244,7 +244,7 @@ int norm(const IVectorl& v) {
 IVectorl operator^(const IVectorl& v,const IVectorl& w) {
 
   if (v.dim() != w.dim()) {
-    cerr << "IVectorl=: IVectorls have different length" << endl;
+    std::cerr << "IVectorl=: IVectorls have different length" << std::endl;
     exit(1);
   }
   int n = v.dim();

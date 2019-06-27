@@ -67,14 +67,14 @@ void getparam(char *inFile) {
     int i, j;
     double zerobase;
 
-    fstream fp(inFile, ios::in);
+    std::fstream fp(inFile, std::ios::in);
 
     if( fp.fail() ) {
 
-       cerr << "getparam"
-            << ": can't open input file: " 
-	    << inFile 
-            << endl;
+       std::cerr << "getparam"
+		 << ": can't open input file: " 
+		 << inFile 
+		 << std::endl;
 
        exit(1);
 
@@ -89,10 +89,10 @@ void getparam(char *inFile) {
     Nd += 1;
 
     if( Gnd > 1 ) {
-      cerr << "The Number of Ground Plane should be less than one!" << endl;
+      std::cerr << "The Number of Ground Plane should be less than one!" << std::endl;
       exit(1);
     } else if ( Gnd < 1 ) {
-      cerr << "You need to specify one ground plane!" << endl;
+      std::cerr << "You need to specify one ground plane!" << std::endl;
       exit(1);
     }
 
@@ -225,7 +225,7 @@ void getparam(char *inFile) {
 
     fp.close();
 
-    //cerr << "maxga=" << maxga << endl;
+    //std::cerr << "maxga=" << maxga << std::endl;
 
     Pi = 4.0*atan(1.0);
     Pih = Pi/2.0;
@@ -269,6 +269,6 @@ void getparam(char *inFile) {
     hw = 6.0*step_w/double(Nws);
     hwh = hw/2.0;
 
-    //cerr << d << eps << endl;
+    //std::cerr << d << eps << std::endl;
 
 }

@@ -5,8 +5,6 @@
 #include <math.h>
 #include <iostream>
 
-using namespace std;
-
 class Complex
 {
    friend Complex operator*(const double&, const Complex&);
@@ -20,7 +18,7 @@ class Complex
    friend double     cabs(const Complex&);
    friend double     cabsm(const Complex&);
    friend Complex   conjg(const Complex&);
-   friend Complex   cmplx(const double,const double);
+   friend Complex   cmplx(const double,const double);  
    friend Complex   polar(const double&, const double&);
    friend Complex   cos(const Complex&);
    friend Complex   cosh(const Complex&);
@@ -29,17 +27,17 @@ class Complex
    friend Complex   tan(const Complex&);
    friend Complex   tanh(const Complex&);
    friend Complex   sqrt(const Complex&);
-   friend Complex   sqrtm(const Complex&);
+   friend Complex   sqrtm(const Complex&); 
    friend Complex   exp(const Complex&);
-   friend Complex   log(const Complex&);
-   friend Complex   log10(const Complex&);
+   friend Complex   log(const Complex&); 
+   friend Complex   log10(const Complex&); 
    friend Complex   pow(const Complex&, const Complex&);
    friend Complex   pow(const Complex&, const double&);
    friend Complex   pow(const Complex&, int&);
-   friend Complex   pow(const double&, const Complex&);
-
-   friend ostream& operator<<(ostream&, Complex&);
-   friend istream& operator>>(istream&, Complex&);
+   friend Complex   pow(const double&, const Complex&);     
+         
+   friend std::ostream& operator<<(std::ostream&, Complex&);
+   friend std::istream& operator>>(std::istream&, Complex&);
 
  public:
    Complex(){}                       // constructors
@@ -66,7 +64,7 @@ class Complex
    Complex& operator*=(const double&);
    Complex& operator/=(const Complex&);
    Complex& operator/=(const double&);
-
+   
    int      operator==(const Complex&) const;
    int      operator!=(const Complex&) const;
 
@@ -74,40 +72,13 @@ class Complex
    double re, im;
 };
 
-Complex operator*(const double&, const Complex&);
-Complex operator+(const double&, const Complex&);
-Complex operator-(const double&, const Complex&);
-Complex operator/(const double&, const Complex&);
-
 double     real(const Complex&);
 double     imag(const Complex&);
-double     arg(const Complex&);
-double     cabs(const Complex&);
-double     cabsm(const Complex&);
-Complex   conjg(const Complex&);
-Complex   cmplx(const double,const double);
-Complex   polar(const double&, const double&);
-Complex   cos(const Complex&);
-Complex   cosh(const Complex&);
-Complex   sin(const Complex&);
-Complex   sinh(const Complex&);
-Complex   tan(const Complex&);
-Complex   tanh(const Complex&);
-Complex   sqrt(const Complex&);
-Complex   sqrtm(const Complex&);
-Complex   exp(const Complex&);
-Complex   log(const Complex&);
-Complex   log10(const Complex&);
-Complex   pow(const Complex&, const Complex&);
-Complex   pow(const Complex&, const double&);
-Complex   pow(const Complex&, int&);
-Complex   pow(const double&, const Complex&);
-
-ostream& operator<<(ostream&, Complex&);
-istream& operator>>(istream&, Complex&);
+Complex    conjg(const Complex&);
+Complex    cmplx(const double,const double);  
 
 inline Complex Complex::operator*(const Complex& c) const {
-
+ 
   Complex com;
   com.re = re * c.re - im * c.im;
   com.im = im * c.re + re * c.im;
@@ -115,7 +86,7 @@ inline Complex Complex::operator*(const Complex& c) const {
 }
 
 inline Complex Complex::operator*(const double& r) const {
-
+ 
   Complex com;
   com.re = re * r;
   com.im = im * r;
@@ -123,25 +94,25 @@ inline Complex Complex::operator*(const double& r) const {
 }
 
 inline Complex Complex::operator/(const Complex& c) const {
-
+ 
   Complex com;
   double t, d;
   if(fabs(c.re) <= fabs(c.im)) {
      t = c.re / c.im;
      d = c.im * (1 + t*t);
      com.re = (re * t + im) / d;
-     com.im = (im * t - re) / d;
+     com.im = (im * t - re) / d;    
   } else {
      t = c.im / c.re;
-     d = c.re * (1 + t*t);
+     d = c.re * (1 + t*t); 
      com.re = (re + im * t) / d;
-     com.im = (im - re * t) / d;
+     com.im = (im - re * t) / d; 
   }
   return(com);
 }
 
-inline Complex Complex::operator/(const double& r) const {
-
+inline Complex Complex::operator/(const double& r) const { 
+ 
   Complex com;
   com.re = re / r;
   com.im = im / r;
@@ -149,7 +120,7 @@ inline Complex Complex::operator/(const double& r) const {
 }
 
 inline Complex Complex::operator-(const Complex& c) const {
-
+ 
   Complex com;
   com.re = re - c.re;
   com.im = im - c.im;
@@ -157,7 +128,7 @@ inline Complex Complex::operator-(const Complex& c) const {
 }
 
 inline Complex Complex::operator-(const double& c) const {
-
+ 
   Complex com;
   com.re = re - c;
   com.im = im;
@@ -165,7 +136,7 @@ inline Complex Complex::operator-(const double& c) const {
 }
 
 inline Complex Complex::operator+(const Complex& c) const {
-
+ 
   Complex com;
   com.re = re + c.re;
   com.im = im + c.im;
@@ -173,7 +144,7 @@ inline Complex Complex::operator+(const Complex& c) const {
 }
 
 inline Complex Complex::operator+(const double& c) const {
-
+ 
   Complex com;
   com.re = re + c;
   com.im = im;
@@ -181,7 +152,7 @@ inline Complex Complex::operator+(const double& c) const {
 }
 
 inline Complex& Complex::operator=(const Complex& c) {
-
+ 
   if(this == &c) return(*this);
   re = c.re;
   im = c.im;
@@ -226,7 +197,7 @@ inline Complex& Complex::operator-=(const double& c) {
 inline Complex& Complex::operator*=(const Complex& c) {
 
   double rep, imp;
-  rep = re * c.re-im * c.im;
+  rep = re * c.re-im * c.im; 
   imp = im * c.re+re * c.im;
   re = rep; im = imp;
   return(*this);
@@ -246,14 +217,14 @@ inline Complex& Complex::operator/=(const Complex& c) {
      t = c.re / c.im;
      d = c.im * (1 + t*t);
      rep = (re * t + im) / d;
-     imp = (im * t - re) / d;
+     imp = (im * t - re) / d;    
   } else {
      t = c.im / c.re;
-     d = c.re * (1 + t*t);
+     d = c.re * (1 + t*t); 
      rep = (re + im * t) / d;
-     imp = (im - re * t) / d;
+     imp = (im - re * t) / d; 
   }
-  re = rep; im = imp;
+  re = rep; im = imp;  
   return(*this);
 }
 
@@ -267,12 +238,12 @@ inline Complex& Complex::operator/=(const double& r) {
 }
 
 inline int Complex::operator==(const Complex& c) const {
-
+  
   return((re==c.re) && (im==c.im));
 }
 
 inline int Complex::operator!=(const Complex& c) const {
-
+  
   return((re!=c.re) || (im!=c.im));
 }
 
@@ -293,3 +264,4 @@ inline Complex Complex::operator-() const {
 }
 
 #endif
+

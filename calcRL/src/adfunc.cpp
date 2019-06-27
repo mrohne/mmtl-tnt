@@ -92,7 +92,7 @@ int gndgeom( int i, double& ti, double& xt, double& yt ) {
 
     if(t < 0.0 || t > Circum[i]) {
 
-       cerr << " t is out of range in gndgeom !!! " << endl;
+       std::cerr << " t is out of range in gndgeom !!! " << std::endl;
        exit( 1 );
 
     }
@@ -133,7 +133,7 @@ int recgeom( int i, double& ti, double& xt, double& yt ) {
 
     if(t < 0.0 || t > Circum[i]) {
 
-       cerr << " t is out of range in recgeom !!! " << endl;
+       std::cerr << " t is out of range in recgeom !!! " << std::endl;
        exit( 1 );
 
     }
@@ -174,7 +174,7 @@ int cirgeom(int i, double& ti, double& xt, double& yt, double& al) {
 
     if( t < 0.0 || t > Circum[i] ) {
 
-       cerr << " t is out of range in cirgeom !!! " << endl;
+       std::cerr << " t is out of range in cirgeom !!! " << std::endl;
        exit( 1 );
 
     } else {
@@ -197,7 +197,7 @@ int trageom( int i, double& ti, double& xt, double& yt ) {
 
     if( t < 0.0 || t > Circum[i] ) {
 
-       cerr << " t is out of range in trageom !!! " << endl;
+       std::cerr << " t is out of range in trageom !!! " << std::endl;
        exit( 1 );
 
     }
@@ -473,8 +473,8 @@ double g0pmn(int i, int j, double r, double rp) {
     g0pmn = tmpv * tangle(Tradix(ii,3),Tradiy(ii,3),Tradix(ii,0),Tradiy(ii,0),Tradix(ii,1),Tradiy(ii,1));
     break;    
   default:
-    cerr << np << endl;
-    cerr << "unidentified number" << endl;
+    std::cerr << np << std::endl;
+    std::cerr << "unidentified number" << std::endl;
   }
 
   return(g0pmn);
@@ -629,8 +629,8 @@ double girpmn(int i, int j, double r, double rp) {
     girpmn = tmpv * tangle(Tradix(ii,3),Tradiy(ii,3),Tradix(ii,0),Tradiy(ii,0),Tradix(ii,1),Tradiy(ii,1));
     break;    
   default:
-    cerr << np << endl;
-    cerr << "unidentified number" << endl;
+    std::cerr << np << std::endl;
+    std::cerr << "unidentified number" << std::endl;
   }
 
   return(girpmn);
@@ -782,8 +782,8 @@ double giipmn(int i, int j, double r, double rp) {
     giipmn = tmpv * tangle(Tradix(ii,3),Tradiy(ii,3),Tradix(ii,0),Tradiy(ii,0),Tradix(ii,1),Tradiy(ii,1));
     break;    
   default:
-    cerr << np << endl;
-    cerr << "unidentified number" << endl;
+    std::cerr << np << std::endl;
+    std::cerr << "unidentified number" << std::endl;
   }
 
   return(giipmn);

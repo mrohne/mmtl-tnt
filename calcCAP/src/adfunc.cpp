@@ -56,7 +56,7 @@ double grcplus(int i, double gamma) {
     tmp = tmp/(1.0+rc(i,i+1)*grcplus(i+1,gamma)*exp(2.0*gamma*(d[i]-d[i+1])));
     return(tmp);
   } else {
-    cerr<<"Error in grcplus"<<endl;
+    std::cerr<<"Error in grcplus"<<std::endl;
     return(-1.0);
   }
 
@@ -73,7 +73,7 @@ double grcminus(int i, double gamma) {
     tmp = tmp/(1.0+rc(i,i-1)*grcminus(i-1,gamma)*exp(2.0*gamma*(d[i-2]-d[i-1])));
     return(tmp);
   } else{
-    cerr<<"Error in Grcminus"<<endl;
+    std::cerr<<"Error in Grcminus"<<std::endl;
     return(0.0);
   }
 
@@ -334,7 +334,7 @@ int recgeom( int i, double& ti, double& xt, double& yt) {
     
     if( t < 0.0 || t > Circum[i] ) {
 
-       cerr << " t is out of range in recgeom !!! " << endl;
+       std::cerr << " t is out of range in recgeom !!! " << std::endl;
        exit( 1 );
 
     }
@@ -377,7 +377,7 @@ int cirgeom( int i, double& ti, double& xt, double& yt ) {
 
     if( t < 0.0 || t > Circum[i] ) {
 
-      cerr << " t is out of range in cirgeom !!! " << endl;
+      std::cerr << " t is out of range in cirgeom !!! " << std::endl;
       exit( 1 );
 
     } else {
@@ -400,7 +400,7 @@ int trageom( int i, double& ti, double& xt, double& yt ) {
 
     if( t < 0.0 || t > Circum[i] ) {
 
-      cerr << " t is out of range in trageom !!! " << endl;
+      std::cerr << " t is out of range in trageom !!! " << std::endl;
       exit( 1 );
 
     }

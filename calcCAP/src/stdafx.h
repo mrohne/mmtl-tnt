@@ -2,10 +2,11 @@
 #define _stdafx__h_
 
 #include <math.h>
+#include <stdlib.h>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <stdlib.h>
+#include <iomanip>
 
 #include "complex.h"
 #include "vector.h"

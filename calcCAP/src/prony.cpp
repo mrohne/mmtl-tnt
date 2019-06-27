@@ -6,7 +6,7 @@
 #include "vector.h"
 #include "matrix.h"
 #include "cmplxvec.h"
-#include "cmplxmat.h"
+#include "cmplxmat.h"  
 #include "systsolv.h"
 
 extern double  pi, k0, Z0, eps0, mu0;
@@ -43,7 +43,7 @@ void prony( Vector xx, Vector yy, CmplxVector& a, CmplxVector& c ) {
   for( i = 0; i < M; i ++ ) {
     alpha[i+1] = f[i];
   }
-
+  
   for( n = 0; n < M; n ++ ) {
     CmplxVector ini(3);
     ini[0] = -3.0;
@@ -53,13 +53,13 @@ void prony( Vector xx, Vector yy, CmplxVector& a, CmplxVector& c ) {
   }
 
   if(mu.dim() != M) {
-    cerr << "M=" << M << endl;
-    cerr << mu.dim() << endl;
-    cerr << mu << endl;
-    cerr << "root finding error!" << endl;
+    std::cerr << "M=" << M << std::endl;
+    std::cerr << mu.dim() << std::endl;
+    std::cerr << mu << std::endl;
+    std::cerr << "root finding error!" << std::endl;
     exit(1);
   }
-
+  
   for( i = 0; i < M; i ++ ) {
     for( j = 0; j < M; j ++ ) {
       sys(i,j) = pow(mu[j],double(i));
@@ -69,7 +69,7 @@ void prony( Vector xx, Vector yy, CmplxVector& a, CmplxVector& c ) {
 
   ludcmp( sys, Indx, dlu );
   lubksb( sys, f, Indx );
-
+ 
   cp = f;
 
   for( i = 0; i < M; i ++ ) {
@@ -90,12 +90,12 @@ void muller( Complex (*fn)( CmplxVector, Complex ), CmplxVector v, CmplxVector& 
 
    if( v[0] == v[1] || v.dim() != 3 ) {
 
-       cerr << "Something is wrong in muller !!!" << endl;
-       exit(1);
+       std::cerr << "Something is wrong in muller !!!" << std::endl;
+       exit(1); 
    }
 
    x = v;
-
+   
    noz = zero.dim();
 
    for(i = 0; i < 3; i++) {
@@ -115,7 +115,7 @@ void muller( Complex (*fn)( CmplxVector, Complex ), CmplxVector v, CmplxVector& 
       d2 = b-sqrt(b*b-4*a*c);
       d = ( cabs(d1) >= cabs(d2) ) ? d1 : d2;
       tmp = x[2]-(x[2]-x[1])*2.0*c/d;
-
+      
       x[2] = tmp;
       x[1] = v[2];
       x[0] = v[1];
@@ -128,9 +128,9 @@ void muller( Complex (*fn)( CmplxVector, Complex ), CmplxVector v, CmplxVector& 
       fv[1] = fx[2];
       fv[0] = fx[1];
       fx = fv;
-
+      
       cc ++;
-
+      
    }
 
    tmpz.resize(zero.dim()+1);
@@ -154,3 +154,4 @@ Complex fun( CmplxVector alpha, Complex xx ) {
   return(res);
 
 }
+

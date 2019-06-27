@@ -6,14 +6,12 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace std;
-
 class Vector
 {
   friend class Matrix;
   friend class Matrix3d;
-  friend ostream& operator<<(ostream&, const Vector&);
-  friend istream& operator>>(istream&, Vector&);
+  friend std::ostream& operator<<(std::ostream&, const Vector&);
+  friend std::istream& operator>>(std::istream&, Vector&);
   friend Vector operator*(double, const Vector&);
   friend double max(const Vector&);
   friend double min(const Vector&);
@@ -62,7 +60,7 @@ private:
 inline double Vector::operator[](int i) const {
 
   if (i < 0 || i > d - 1) {
-    cerr << "Vector: index out of range" << endl;
+    std::cerr << "Vector: index out of range" << std::endl;
     exit(1);
   }
   return (v[i]);
@@ -71,7 +69,7 @@ inline double Vector::operator[](int i) const {
 inline double& Vector::operator[](int i) {
 
   if (i < 0 || i > d - 1) {
-    cerr << "Vector: index out of range" << endl;
+    std::cerr << "Vector: index out of range" << std::endl;
     exit(1);
   }
   return (v[i]);
@@ -82,7 +80,7 @@ inline Vector Vector::operator+(const Vector& vec) const {
   Vector result(d);
   int n = d;
   if (d != vec.d) {
-    cerr << "Vector+: vectors have different length" << endl;
+    std::cerr << "Vector+: vectors have different length" << std::endl;
     exit(1);
   }
   while (n--) result.v[n] = v[n] + vec.v[n];
@@ -94,7 +92,7 @@ inline Vector Vector::operator-(const Vector& vec) const {
   Vector result(d);
   int n = d;
   if (d != vec.d) {
-    cerr << "Vector-: vectors have different length" << endl;
+    std::cerr << "Vector-: vectors have different length" << std::endl;
     exit(1);
   }
   while (n--) result.v[n] = v[n] - vec.v[n];
@@ -121,7 +119,7 @@ inline Vector& Vector::operator+=(const Vector& vec) {
 
   int n = d;
   if (d != vec.d) {
-    cerr << "Vector+=: vectors have different length" << endl;
+    std::cerr << "Vector+=: vectors have different length" << std::endl;
     exit(1);
   }
   while (n--) v[n] += vec.v[n];
@@ -132,7 +130,7 @@ inline Vector& Vector::operator-=(const Vector& vec) {
 
   int n = d;
   if (d != vec.d) {
-    cerr << "Vector-=: vectors have different length" << endl;
+    std::cerr << "Vector-=: vectors have different length" << std::endl;
     exit(1);
   }
   while (n--) v[n] -= vec.v[n];
@@ -143,7 +141,7 @@ inline Vector& Vector::operator/=(double x) {
 
   int n = d;
   if (x == 0) {
-    cerr << "Vector/=: divided by zero" << endl;
+    std::cerr << "Vector/=: divided by zero" << std::endl;
     exit(1);
   }
   while (n--) v[n] /= x;
@@ -168,7 +166,7 @@ inline Vector Vector::operator-() const {
 inline double Vector::operator*(const Vector& vec) const {
 
   if (d != vec.d) {
-    cerr << "Vector*: vectors have different length" << endl;
+    std::cerr << "Vector*: vectors have different length" << std::endl;
     exit(1);
   }
   double result  = 0;
@@ -182,7 +180,7 @@ inline Vector& Vector::operator=(const Vector& vec) {
   //if (this != &vec) {
   //int n = vec.d;
   //if (d != vec.d) {
-  //cerr << "Vector=: vectors have different length" << endl;
+  //std::cerr << "Vector=: vectors have different length" << std::endl;
   //exit(1);
   //}
   //while (n--) v[n] = vec.v[n];
@@ -232,12 +230,12 @@ inline void  Vector::swap_elem(int m,int n) {
 
   double tmp = v[m];
   v[m] = v[n];
-  v[n] = tmp;
+  v[n] = tmp; 
 }
 
 
-inline void Print(const Vector& v, ostream& out=cout) { out << v; }
-inline void Read(Vector& v, istream& in=cin)          { in >> v;  }
+inline void Print(const Vector& v, std::ostream& out=std::cout) { out << v; }
+inline void Read(Vector& v, std::istream& in=std::cin)          { in >> v;  }
 inline double max(double x,double y)                  { return (x > y ? x : y); }
 
 double norm(const Vector& v);

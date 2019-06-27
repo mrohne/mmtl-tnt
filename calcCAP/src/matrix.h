@@ -6,8 +6,8 @@
 class Matrix
 {
   friend class Matrix3d;
-  friend ostream& operator<<(ostream&, const Matrix&);
-  friend istream& operator>>(istream&, Matrix&);
+  friend std::ostream& operator<<(std::ostream&, const Matrix&);
+  friend std::istream& operator>>(std::istream&, Matrix&);
   friend Matrix operator*(double, const Matrix&);
   friend double max(const Matrix&);
   friend double min(const Matrix&);
@@ -75,7 +75,7 @@ private:
   void     check_dimensions(const Matrix&) const;
 };
 
-inline void Print(const Matrix& m, ostream& out=cout) { out << m; }
-inline void Read(Matrix& m, istream& in=cin)          { in >> m;  }
+inline void Print(const Matrix& m, std::ostream& out=std::cout) { out << m; }
+inline void Read(Matrix& m, std::istream& in=std::cin)          { in >> m;  }
 
 #endif

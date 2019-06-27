@@ -8,8 +8,8 @@ class CmplxVector
 {
   friend class Complex;
   friend class CmplxMatrix;
-  friend ostream& operator<<(ostream&, const CmplxVector&);
-  friend istream& operator>>(istream&, CmplxVector&);
+  friend std::ostream& operator<<(std::ostream&, const CmplxVector&);
+  friend std::istream& operator>>(std::istream&, CmplxVector&);
   friend CmplxVector operator*(double, const CmplxVector&);
   friend CmplxVector operator*(const Complex&, const CmplxVector&);
   friend Complex inner(const CmplxVector&, const CmplxVector&);
@@ -79,13 +79,12 @@ public:
   void check_dimensions(const CmplxVector&) const;
 };
 
-inline void Print(const CmplxVector& v, ostream& out=cout) { out << v; }
-inline void Read(CmplxVector& v, istream& in=cin)          { in >> v;  }
+inline void Print(const CmplxVector& v, std::ostream& out=std::cout) { out << v; }
+inline void Read(CmplxVector& v, std::istream& in=std::cin)          { in >> v;  }
 
 inline Vector      real(const CmplxVector& x) { return x.real(); }
 inline Vector      imag(const CmplxVector& x) { return x.imag(); }
 inline CmplxVector conjg(const CmplxVector& x) { return x.conjg(); }
-
 
 double norm(const CmplxVector& x);
 double norm2(const CmplxVector& x);

@@ -10,7 +10,7 @@ CmplxVector::CmplxVector(int n) {
  
  Complex zero(0.,0.);
  if (n < 0) {
-   cerr << "complex vector: negative dimension." << endl;
+   std::cerr << "complex vector: negative dimension." << std::endl;
    exit(1);
  }
  d = n;
@@ -24,7 +24,7 @@ CmplxVector::CmplxVector(int n) {
 CmplxVector::CmplxVector(int n, double a) {
 
   if (n <= 0) {
-    cerr << "complex vector: undefined dimension." << endl;
+    std::cerr << "complex vector: undefined dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -35,7 +35,7 @@ CmplxVector::CmplxVector(int n, double a) {
 CmplxVector::CmplxVector(int n, Complex a) {
 
  if (n < 0) {
-   cerr << "complex vector: negative dimension." << endl;
+   std::cerr << "complex vector: negative dimension." << std::endl;
    exit(1);
  }
  d  = n;
@@ -65,7 +65,7 @@ CmplxVector::CmplxVector(const Vector& v1) {
 void CmplxVector::check_dimensions(const CmplxVector& vec) const {
  
   if (d != vec.d) {
-   cerr << "Complex vector arguments have different dimensions." << endl;
+   std::cerr << "Complex vector arguments have different dimensions." << std::endl;
    exit(1);
  }
 }
@@ -73,7 +73,7 @@ void CmplxVector::check_dimensions(const CmplxVector& vec) const {
 Complex CmplxVector::operator[](int i) const {
  
  if (i < 0 || i >= d) {
-   cerr << "Complex vector: index out of range" << endl;
+   std::cerr << "Complex vector: index out of range" << std::endl;
    exit(1);
  }
  return (v[i]);
@@ -82,7 +82,7 @@ Complex CmplxVector::operator[](int i) const {
 Complex& CmplxVector::operator[](int i) {
  
  if (i < 0 || i >= d) {
-   cerr << "Complex vector: index out of range" << endl;
+   std::cerr << "Complex vector: index out of range" << std::endl;
    exit(1);
  }
  return (v[i]);
@@ -351,16 +351,16 @@ Complex inner(const CmplxVector& x, const CmplxVector& x0)
   return(x.conjg()*x0); 
 }
 
-ostream& operator<<(ostream& out, const CmplxVector& v)
+std::ostream& operator<<(std::ostream& out, const CmplxVector& v)
 {
  out.precision(10);
  for (int i = 0; i < v.d; i++)  
- //out << v.v[i] << endl;
-   out << " [" << i << "]=" << v.v[i] << endl; 
+ //out << v.v[i] << std::endl;
+   out << " [" << i << "]=" << v.v[i] << std::endl; 
  return (out);
 }
 
-istream& operator>>(istream& in, CmplxVector& x)
+std::istream& operator>>(std::istream& in, CmplxVector& x)
 {
  int i = 0;
  while (i < x.d && in >> x.v[i++]);
@@ -395,7 +395,7 @@ double normsa(const CmplxVector& x)
 CmplxVector operator^(const CmplxVector& v,const CmplxVector& w) {
 
   if (v.dim() != w.dim()) {
-    cerr << "CmplxVector=: vectors have different length" << endl;
+    std::cerr << "CmplxVector=: vectors have different length" << std::endl;
     exit(1);
   }
   int n = v.dim();

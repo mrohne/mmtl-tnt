@@ -8,7 +8,7 @@
 Vector::Vector(int n)  {
 
   if (n < 0) {
-    cerr << "Vector: negative dimension." << endl;
+    std::cerr << "Vector: negative dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -22,7 +22,7 @@ Vector::Vector(int n)  {
 Vector::Vector(int n, double v0) {
 
   if (n <= 0) {
-    cerr << "Vector: undefined dimension." << endl;
+    std::cerr << "Vector: undefined dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -33,7 +33,7 @@ Vector::Vector(int n, double v0) {
 Vector::Vector(int n, double* v0) {
 
   if (n <= 0) {
-    cerr << "Vector: undefined dimension." << endl;
+    std::cerr << "Vector: undefined dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -56,7 +56,7 @@ Vector::Vector(const Vector& v0) {
 double Vector::operator[](int i) const {
 
   if (i < 0 || i > d - 1) {
-    cerr << "Vector: index out of range" << endl;
+    std::cerr << "Vector: index out of range" << std::endl;
     exit(1);
   }
   return (v[i]);
@@ -65,7 +65,7 @@ double Vector::operator[](int i) const {
 double& Vector::operator[](int i) {
 
   if (i < 0 || i > d - 1) {
-    cerr << "Vector: index out of range" << endl;
+    std::cerr << "Vector: index out of range" << std::endl;
     exit(1);
   }
   return (v[i]);
@@ -76,7 +76,7 @@ Vector Vector::operator+(const Vector& vec) const {
   Vector result(d);
   int n = d;
   if (d != vec.d) {
-    cerr << "Vector+: vectors have different length" << endl;
+    std::cerr << "Vector+: vectors have different length" << std::endl;
     exit(1);
   }
   while (n--) result.v[n] = v[n] + vec.v[n];
@@ -88,7 +88,7 @@ Vector Vector::operator-(const Vector& vec) const {
   Vector result(d);
   int n = d;
   if (d != vec.d) {
-    cerr << "Vector-: vectors have different length" << endl;
+    std::cerr << "Vector-: vectors have different length" << std::endl;
     exit(1);
   }
   while (n--) result.v[n] = v[n] - vec.v[n];
@@ -115,7 +115,7 @@ Vector& Vector::operator+=(const Vector& vec) {
 
   int n = d;
   if (d != vec.d) {
-    cerr << "Vector+=: vectors have different length" << endl;
+    std::cerr << "Vector+=: vectors have different length" << std::endl;
     exit(1);
   }
   while (n--) v[n] += vec.v[n];
@@ -126,7 +126,7 @@ Vector& Vector::operator-=(const Vector& vec) {
 
   int n = d;
   if (d != vec.d) {
-    cerr << "Vector-=: vectors have different length" << endl;
+    std::cerr << "Vector-=: vectors have different length" << std::endl;
     exit(1);
   }
   while (n--) v[n] -= vec.v[n];
@@ -137,7 +137,7 @@ Vector& Vector::operator/=(double x) {
 
   int n = d;
   if (x == 0) {
-    cerr << "Vector/=: divided by zero" << endl;
+    std::cerr << "Vector/=: divided by zero" << std::endl;
     exit(1);
   }
   while (n--) v[n] /= x;
@@ -162,7 +162,7 @@ Vector Vector::operator-() const {
 double Vector::operator*(const Vector& vec) const {
 
   if (d != vec.d) {
-    cerr << "Vector*: vectors have different length" << endl;
+    std::cerr << "Vector*: vectors have different length" << std::endl;
     exit(1);
   }
   double result  = 0;
@@ -176,7 +176,7 @@ Vector& Vector::operator=(const Vector& vec) {
   //if (this != &vec) {
   //int n = vec.d;
   //if (d != vec.d) {
-  //cerr << "Vector=: vectors have different length" << endl;
+  //std::cerr << "Vector=: vectors have different length" << std::endl;
   //exit(1);
   //}
   //while (n--) v[n] = vec.v[n];
@@ -231,15 +231,15 @@ void  Vector::swap_elem(int m,int n) {
 
 /**************        friends        *********************/
 
-ostream& operator<<(ostream& out, const Vector& v) {
+std::ostream& operator<<(std::ostream& out, const Vector& v) {
 
   for (int i = 0; i < v.d; i++)
-    //out << v.v[i] << ' ' << endl;
-    out << " [" << i << "] = " << v.v[i] << ' ' << endl;
+    //out << v.v[i] << ' ' << std::endl;
+    out << " [" << i << "] = " << v.v[i] << ' ' << std::endl;
   return (out);
 }
 
-istream& operator>>(istream& in, Vector& x) {
+std::istream& operator>>(std::istream& in, Vector& x) {
 
   int i = 0;
   while ((i < x.d) && (in >> x.v[i++]));
@@ -312,7 +312,7 @@ double norm2(const Vector& v) {
 Vector operator^(const Vector& v,const Vector& w) {
 
   if (v.dim() != w.dim()) {
-    cerr << "Vector=: vectors have different length" << endl;
+    std::cerr << "Vector=: vectors have different length" << std::endl;
     exit(1);
   }
   int n = v.dim();

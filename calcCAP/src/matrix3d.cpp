@@ -96,7 +96,7 @@ void Matrix3d::free() {
 void Matrix3d::check_dimensions(const Matrix3d& mat) const {
 
   if (d_i != mat.d_i || d_j != mat.d_j || d_k != mat.d_k) {
-    cerr << "Matrix3d:incompatible matrix types." << endl;
+    std::cerr << "Matrix3d:incompatible matrix types." << std::endl;
     exit(1);
   }
 }
@@ -142,7 +142,7 @@ int Matrix3d::operator==(const Matrix3d& x) const {
 Vector Matrix3d::vec(int i, int j)  const {
 
   if (i < 0 || i >= d_i || j < 0 || j >= d_j ) {
-    cerr << "Matrix3d: indexes in vec out of range" << endl;
+    std::cerr << "Matrix3d: indexes in vec out of range" << std::endl;
     exit(1);
   }
   Vector result(d_k);
@@ -154,7 +154,7 @@ Vector Matrix3d::vec(int i, int j)  const {
 Vector  Matrix3d::row(int i) const {
 
   if (i < 0 || i >= d_i)  {
-    cerr << "Matrix3d: row index out of range" << endl;
+    std::cerr << "Matrix3d: row index out of range" << std::endl;
     exit(1);
   }
   Vector result(d_j);
@@ -166,7 +166,7 @@ Vector  Matrix3d::row(int i) const {
 Vector Matrix3d::col(int i)  const {
 
   if (i < 0 || i >= d_j) {
-    cerr << "Matrix3d: col index out of range" << endl;
+    std::cerr << "Matrix3d: col index out of range" << std::endl;
     exit(1);
   }
   Vector result(d_i);
@@ -178,7 +178,7 @@ Vector Matrix3d::col(int i)  const {
 Matrix Matrix3d::mtr(int k) const {
   
   if(k < 0 || k >= d_k ) {
-    cerr << "Matrix3d: k index out of range" << endl;
+    std::cerr << "Matrix3d: k index out of range" << std::endl;
     exit(1);
   } 
   Matrix result(d_i,d_j);
@@ -191,15 +191,15 @@ Matrix Matrix3d::mtr(int k) const {
 double& Matrix3d::operator()(int i, int j, int k) {
 
   if (i < 0 || i >= d_i) {
-    cerr << "Matrix3d: i index out of range" << endl;
+    std::cerr << "Matrix3d: i index out of range" << std::endl;
     exit(1);
   }
   if (j < 0 || j >= d_j) {
-    cerr << "Matrix3d: j index out of range" << endl;
+    std::cerr << "Matrix3d: j index out of range" << std::endl;
     exit(1);
   }
   if (k < 0 || k >= d_k) {
-    cerr << "Matrix3d: k index out of range" << endl;
+    std::cerr << "Matrix3d: k index out of range" << std::endl;
     exit(1);
   }
   return (elem(i,j,k));
@@ -208,15 +208,15 @@ double& Matrix3d::operator()(int i, int j, int k) {
 double& Matrix3d::operator()(int i, int j, int k) const {
 
   if (i < 0 || i >= d_i) {
-    cerr << "Matrix3d: i index out of range" << endl;
+    std::cerr << "Matrix3d: i index out of range" << std::endl;
     exit(1);
   }
   if (j < 0 || j >= d_j) {
-    cerr << "Matrix3d: j index out of range" << endl;
+    std::cerr << "Matrix3d: j index out of range" << std::endl;
     exit(1);
   }
   if (k < 0 || k >= d_k) {
-    cerr << "Matrix3d: k index out of range" << endl;
+    std::cerr << "Matrix3d: k index out of range" << std::endl;
     exit(1);
   }
   return (elem(i,j,k));
@@ -304,7 +304,7 @@ Matrix3d Matrix3d::operator*(double f) const {
 Matrix3d Matrix3d::operator/(double a) {
 
   if(a == 0) {
-    cerr << "Matrix3d: divided by zero" << endl;
+    std::cerr << "Matrix3d: divided by zero" << std::endl;
     exit(1);
   }
   a = 1. / a;
@@ -315,7 +315,7 @@ Matrix3d Matrix3d::operator/(double a) {
 double Matrix3d::operator*(const Matrix3d& mat) const {
 
   if (d_i != mat.d_i || d_j != mat.d_j || d_k != mat.d_k) {
-    cerr << "Matrix3d: matrix3d have different length" << endl;
+    std::cerr << "Matrix3d: matrix3d have different length" << std::endl;
     exit(1);
   }
   double result = 0;
@@ -329,7 +329,7 @@ double Matrix3d::operator*(const Matrix3d& mat) const {
 Matrix3d Matrix3d::operator^(const Matrix3d& mat) const {
 
   if (d_i != mat.d_i || d_j != mat.d_j || d_k != mat.d_k) {
-    cerr << "Matrix3d: matrix3d have different length" << endl;
+    std::cerr << "Matrix3d: matrix3d have different length" << std::endl;
     exit(1);
   }
   Matrix3d result(d_i,d_j,d_k);
@@ -387,14 +387,14 @@ Matrix3d& Matrix3d::resize(int new_d_i, int new_d_j, int new_d_k) {
 
 /***************************** friends **************************/
 
-ostream& operator<<(ostream& s, const Matrix3d& mat) {
+std::ostream& operator<<(std::ostream& s, const Matrix3d& mat) {
   
   int i,j,k;
   for(i = 0; i < mat.d_i; i++)
     for(j = 0; j < mat.d_j; j++)
       for(k = 0; k < mat.d_k; k++)
 	s << " [" << i << "][" << j << "][" << k 
-          << "] = " << mat.elem(i,j,k) << endl;     
+          << "] = " << mat.elem(i,j,k) << std::endl;     
   return (s);
 }
 

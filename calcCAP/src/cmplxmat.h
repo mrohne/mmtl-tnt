@@ -8,8 +8,8 @@
 class CmplxMatrix
 {
   friend class Matrix;
-  friend ostream& operator<<(ostream&, const CmplxMatrix&);
-  friend istream& operator>>(istream&, CmplxMatrix&);
+  friend std::ostream& operator<<(std::ostream&, const CmplxMatrix&);
+  friend std::istream& operator>>(std::istream&, CmplxMatrix&);
 
 public:
 
@@ -82,6 +82,6 @@ private:
   Complex&  elem(int i, int j) const { return v[i]->v[j]; }
 };
 
-inline void Print(const CmplxMatrix& m, ostream& out=cout) { out << m; }
-inline void Read(CmplxMatrix& m, istream& in=cin)          { in >> m;  }
+inline void Print(const CmplxMatrix& m, std::ostream& out=std::cout) { out << m; }
+inline void Read(CmplxMatrix& m, std::istream& in=std::cin)          { in >> m;  }
 #endif

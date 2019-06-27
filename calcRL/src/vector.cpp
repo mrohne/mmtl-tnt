@@ -8,7 +8,7 @@
 Vector::Vector(int n)  {
 
   if (n < 0) {
-    cerr << "Vector: negative dimension." << endl;
+    std::cerr << "Vector: negative dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -22,7 +22,7 @@ Vector::Vector(int n)  {
 Vector::Vector(int n, double v0) {
 
   if (n <= 0) {
-    cerr << "Vector: undefined dimension." << endl;
+    std::cerr << "Vector: undefined dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -33,7 +33,7 @@ Vector::Vector(int n, double v0) {
 Vector::Vector(int n, double* v0) {
 
   if (n <= 0) {
-    cerr << "Vector: undefined dimension." << endl;
+    std::cerr << "Vector: undefined dimension." << std::endl;
     exit(1);
   }
   d  = n;
@@ -54,15 +54,15 @@ Vector::Vector(const Vector& v0) {
 /************************* members ****************************/
 /**************        friends        *********************/
 
-ostream& operator<<(ostream& out, const Vector& v) {
+std::ostream& operator<<(std::ostream& out, const Vector& v) {
 
   for (int i = 0; i < v.d; i++)
-    //out << v.v[i] << ' ' << endl;
-    out << " [" << i << "] = " << v.v[i] << ' ' << endl;
+    //out << v.v[i] << ' ' << std::endl;
+    out << " [" << i << "] = " << v.v[i] << ' ' << std::endl;
   return (out);
 }
 
-istream& operator>>(istream& in, Vector& x) {
+std::istream& operator>>(std::istream& in, Vector& x) {
 
   int i = 0;
   while ((i < x.d) && (in >> x.v[i++]));
@@ -111,7 +111,7 @@ double norm2(const Vector& v) {
 Vector operator^(const Vector& v,const Vector& w) {
 
   if (v.dim() != w.dim()) {
-    cerr << "Vector=: vectors have different length" << endl;
+    std::cerr << "Vector=: vectors have different length" << std::endl;
     exit(1);
   }
   int n = v.dim();

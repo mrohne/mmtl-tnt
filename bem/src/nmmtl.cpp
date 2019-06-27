@@ -207,7 +207,7 @@ int main (int argc, char **argv)
   if ( iop < 1 )
     {
       printf ("No filename on command line!\n");
-      printf ("nmmtl.exe <filename> <c-seg> <p-seg>\n");
+      printf ("%s <filename> <c-seg> <p-seg>\n", argv[0]);
       printf ("<filename> - name of the graphic file\n");
       printf ("<c-seg>    - number of contour segments\n");
       printf ("<p-seg>    - number of plane/dielectric segments\n");

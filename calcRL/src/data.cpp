@@ -66,13 +66,13 @@ void getparam() {
     int i;
     extern char fileIn[1024];
 
-    fstream fp(fileIn, ios::in);
+    std::fstream fp(fileIn, std::ios::in);
 
     if( fp.fail() ) {
 
-       cerr << "getparam"
+       std::cerr << "getparam"
             << ": can't open input file: " << fileIn
-            << endl;
+            << std::endl;
 
        exit(1);
 
@@ -84,10 +84,10 @@ void getparam() {
     fp >> Tra;        fp.ignore(100,'\n');
 
     if( Gnd > 1 ) {
-      cerr << "The Number of Ground Plane should be one!" << endl;
+      std::cerr << "The Number of Ground Plane should be one!" << std::endl;
       exit(1);
     } else if ( Gnd < 1 ) {
-      cerr << "You need to specify one ground plane!" << endl;
+      std::cerr << "You need to specify one ground plane!" << std::endl;
       exit(1);
     }
 
@@ -266,8 +266,8 @@ void getparam() {
     oms = omega*mu*sigma;
     sqrtoms = sqrt(oms);
 
-    cout << freq << endl;
-    cout << sigma << endl;
+    std::cout << freq << std::endl;
+    std::cout << sigma << std::endl;
 
 }
 

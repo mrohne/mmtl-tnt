@@ -8,8 +8,8 @@
 class Matrix
 {
   friend class Matrix3d;
-  friend ostream& operator<<(ostream&, const Matrix&);
-  friend istream& operator>>(istream&, Matrix&);
+  friend std::ostream& operator<<(std::ostream&, const Matrix&);
+  friend std::istream& operator>>(std::istream&, Matrix&);
   friend Matrix operator*(double, const Matrix&);
   friend double max(const Matrix&);
   friend double min(const Matrix&);
@@ -107,7 +107,7 @@ inline int Matrix::operator==(const Matrix& x) const {
 inline Vector& Matrix::row(int i) const {
 
   if (i < 0 || i >= d_i)  {
-    cerr << "Matrix: row index out of range" << endl;
+    std::cerr << "Matrix: row index out of range" << std::cerr;
     exit(1);
   }
   return (*v[i]);
@@ -116,11 +116,11 @@ inline Vector& Matrix::row(int i) const {
 inline double& Matrix::operator()(int i, int j) {
 
   if (i < 0 || i >= d_i) {
-    cerr << "Matrix: row index out of range" << endl;
+    std::cerr << "Matrix: row index out of range" << std::cerr;
     exit(1);
   }
   if (j < 0 || j >= d_j) {
-    cerr << "Matrix: col index out of range" << endl;
+    std::cerr << "Matrix: col index out of range" << std::cerr;
     exit(1);
   }
   return (elem(i,j));
@@ -129,11 +129,11 @@ inline double& Matrix::operator()(int i, int j) {
 inline double& Matrix::operator()(int i, int j) const {
 
   if (i < 0 || i >= d_i) {
-    cerr << "Matrix: row index out of range" << endl;
+    std::cerr << "Matrix: row index out of range" << std::cerr;
     exit(1);
   }
   if (j < 0 || j >= d_j) {
-    cerr << "Matrix: col index out of range" << endl;
+    std::cerr << "Matrix: col index out of range" << std::cerr;
     exit(1);
   }
   return (elem(i,j));
@@ -142,7 +142,7 @@ inline double& Matrix::operator()(int i, int j) const {
 inline Vector Matrix::col(int i)  const {
 
   if (i < 0 || i >= d_j) {
-    cerr << "Matrix: col index out of range" << endl;
+    std::cerr << "Matrix: col index out of range" << std::cerr;
     exit(1);
   }
   Vector result(d_i);
@@ -154,7 +154,7 @@ inline Vector Matrix::col(int i)  const {
 inline Vector Matrix::diag()  const {
 
   if (d_i != d_j) {
-    cerr << "Matrix: diag defined only if d_i = d_j" << endl;
+    std::cerr << "Matrix: diag defined only if d_i = d_j" << std::cerr;
     exit(1);
   }
   Vector result(d_i);
@@ -166,7 +166,7 @@ inline Vector Matrix::diag()  const {
 inline Matrix::operator Vector() const {
 
   if (d_j != 1) {
-    cerr << "error: cannot make vector from matrix" << endl;
+    std::cerr << "error: cannot make vector from matrix" << std::cerr;
     exit(1);
   }
   return (col(0));
@@ -228,7 +228,7 @@ inline Matrix& Matrix::operator/=(double x) {
 
   int i, j;
   if (x == 0) {
-    cerr << "Matrix/=: divided by zero" << endl;
+    std::cerr << "Matrix/=: divided by zero" << std::cerr;
     exit(1);
   }
   for(i = 0; i < d_i; i++)
@@ -269,7 +269,7 @@ inline Matrix Matrix::operator*(double f) const {
 inline Matrix Matrix::operator*(const Matrix& mat) {
 
   if (d_j != mat.d_i) {
-    cerr << "matrix multiplication: incompatible matrix types" << endl;
+    std::cerr << "matrix multiplication: incompatible matrix types" << std::cerr;
     exit(1);
   }
   Matrix result(d_i, mat.d_j);
@@ -282,7 +282,7 @@ inline Matrix Matrix::operator*(const Matrix& mat) {
 inline Matrix Matrix::operator/(double a) {
 
   if(a == 0) {
-    cerr << "Matrix: divided by zero" << endl;
+    std::cerr << "Matrix: divided by zero" << std::cerr;
     exit(1);
   }
   a = 1. / a;
@@ -293,7 +293,7 @@ inline Matrix Matrix::operator/(double a) {
 inline Matrix Matrix::operator^(const Matrix& mat) const {
 
   if (d_i != mat.d_i || d_j != mat.d_j) {
-    cerr << "Matrix=: matrixes have different sizes" << endl;
+    std::cerr << "Matrix=: matrixes have different sizes" << std::cerr;
     exit(1);
   }
   Matrix res(d_i,d_j); 
@@ -313,7 +313,7 @@ inline Matrix Matrix::abs() const {
 }
 
 
-inline void Print(const Matrix& m, ostream& out=cout) { out << m; }
-inline void Read(Matrix& m, istream& in=cin)          { in >> m;  }
+inline void Print(const Matrix& m, std::ostream& out=std::cout) { out << m; }
+inline void Read(Matrix& m, std::istream& in=std::cin)          { in >> m;  }
 
 #endif

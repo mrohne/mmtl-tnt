@@ -4,12 +4,10 @@
 #include <math.h>
 #include <iostream>
 
-using namespace std;
-
 class IVectorl
 {
   friend class IMatrix;
-  friend ostream& operator<<(ostream&, const IVectorl&);
+  friend std::ostream& operator<<(std::ostream&, const IVectorl&);
   friend IVectorl operator*(int, const IVectorl&);
 
 public:
@@ -41,14 +39,14 @@ public:
 
 private:
 
-  int* v;      //            v(0:d-1)
+  int* v;      //            v(0:d-1) 
   int        d;
 };
 
 inline int IVectorl::operator[](int i) const {
 
   if (i < 0 || i > d - 1) {
-    cerr << "IVectorl: index " << i << " out of range" << endl;
+    std::cerr << "IVectorl: index " << i << " out of range" << std::endl;
     exit(1);
   }
   return (v[i]);
@@ -57,7 +55,7 @@ inline int IVectorl::operator[](int i) const {
 inline int& IVectorl::operator[](int i) {
 
   if (i < 0 || i > d - 1) {
-    cerr << "IVectorl: index " << i << " out of range" << endl;
+    std::cerr << "IVectorl: index " << i << " out of range" << std::endl;
     exit(1);
   }
   return (v[i]);
@@ -68,7 +66,7 @@ inline IVectorl IVectorl::operator+(const IVectorl& vec) const {
   IVectorl result(d);
   int n = d;
   if (d != vec.d) {
-    cerr << "IVectorl+: IVectorls have different length" << endl;
+    std::cerr << "IVectorl+: IVectorls have different length" << std::endl;
     exit(1);
   }
   while (n--) result.v[n] = v[n] + vec.v[n];
@@ -80,7 +78,7 @@ inline IVectorl IVectorl::operator-(const IVectorl& vec) const {
   IVectorl result(d);
   int n = d;
   if (d != vec.d) {
-    cerr << "IVectorl-: IVectorls have different length" << endl;
+    std::cerr << "IVectorl-: IVectorls have different length" << std::endl;
     exit(1);
   }
   while (n--) result.v[n] = v[n] - vec.v[n];
@@ -107,7 +105,7 @@ inline IVectorl& IVectorl::operator+=(const IVectorl& vec) {
 
   int n = d;
   if (d != vec.d) {
-    cerr << "IVectorl+=: IVectorls have different length" << endl;
+    std::cerr << "IVectorl+=: IVectorls have different length" << std::endl;
     exit(1);
   }
   while (n--) v[n] += vec.v[n];
@@ -118,7 +116,7 @@ inline IVectorl& IVectorl::operator-=(const IVectorl& vec) {
 
   int n = d;
   if (d != vec.d) {
-    cerr << "IVectorl-=: IVectorls have different length" << endl;
+    std::cerr << "IVectorl-=: IVectorls have different length" << std::endl;
     exit(1);
   }
   while (n--) v[n] -= vec.v[n];
@@ -136,7 +134,7 @@ inline IVectorl IVectorl::operator-() const {
 inline int IVectorl::operator*(const IVectorl& vec) const {
 
   if (d != vec.d) {
-    cerr << "IVectorl*: IVectorls have different length" << endl;
+    std::cerr << "IVectorl*: IVectorls have different length" << std::endl;
     exit(1);
   }
   int result  = 0;
@@ -150,7 +148,7 @@ inline IVectorl& IVectorl::operator=(const IVectorl& vec) {
   //if (this != &vec) {
   //int n = vec.d;
   //if (d != vec.d) {
-  //cerr << "IVectorl=: IVectorls have different length" << endl;
+  //std::cerr << "IVectorl=: IVectorls have different length" << std::endl;
   //exit(1);
   //}
   //while (n--) v[n] = vec.v[n];

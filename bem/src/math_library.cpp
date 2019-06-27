@@ -155,7 +155,7 @@ void c_fft(int *n,COMPLEX *a,COMPLEX *c,int *status)
    if (ierr != 0)
      {
        (*status) = FAIL;
-       fprintf(stderr,"ELECTRO-F-FFTINT Fast Fourier Transform Faileds with code %ld.\n",ierr);
+       fprintf(stderr,"ELECTRO-F-FFTINT Fast Fourier Transform Faileds with code %d.\n",ierr);
        return;
      }
    (*status) = SUCCESS;
@@ -225,7 +225,7 @@ void c_fft_inv(int *n,COMPLEX *a,COMPLEX *c,int *status)
   if (ierr != 0)
     {
       (*status) = FAIL;
-      fprintf(stderr,"ELECTRO-F-FFTINT Fast Fourier Transform Faileds with code %ld.\n",ierr);
+      fprintf(stderr,"ELECTRO-F-FFTINT Fast Fourier Transform Faileds with code %d.\n",ierr);
       return;
     }
   (*status) = SUCCESS;
@@ -447,7 +447,7 @@ void c_init_calc_eigenvalues(int *status)
 //    if (ierr != 0)
 //      {
 //        (*status) = FAIL;
-//        fprintf(stderr,"ELECTRO-F-EIGENINT Error on computing eigenvalues, NSWC code %ld\n",ierr);
+//        fprintf(stderr,"ELECTRO-F-EIGENINT Error on computing eigenvalues, NSWC code %d\n",ierr);
 //        return;
 //      }
 
@@ -768,7 +768,7 @@ void c_invert_matrix(int *n,COMPLEX *a,COMPLEX *b,
   if (ierr != 0) 
     {
       (*status) = FAIL;
-      fprintf(stderr,"ELECTRO-F-INVRSINT Error in matrix inversion, NSWC code %ld\n",ierr);
+      fprintf(stderr,"ELECTRO-F-INVRSINT Error in matrix inversion, NSWC code %d\n",ierr);
       return;
     }
 
@@ -962,7 +962,7 @@ void invert_matrix(int *n,float *a,float *b,
   if (ierr != 0) 
     {
       (*status) = FAIL;
-      fprintf(stderr,"ELECTRO-F-INVRSINT Error in matrix inversion, NSWC code %ld\n",ierr);
+      fprintf(stderr,"ELECTRO-F-INVRSINT Error in matrix inversion, NSWC code %d\n",ierr);
       return;
     }
 
@@ -1049,7 +1049,7 @@ void invert_matrix_cond(int *n,float *a,float *b,
   if (ierr != 0) 
     {
       (*status) = FAIL ;
-      fprintf(stderr,"ELECTRO-F-INVRSINT Error in matrix inversion, NSWC code %ld\n",ierr);
+      fprintf(stderr,"ELECTRO-F-INVRSINT Error in matrix inversion, NSWC code %d\n",ierr);
       return;
     }
 
@@ -1246,7 +1246,7 @@ void d_invert_matrix(int *n,double *a,double *b,
   if (ierr != 0) 
     {
       (*status) = FAIL;
-      fprintf(stderr,"ELECTRO-F-INVRSINT Error in matrix inversion, NSWC code %ld\n",ierr);
+      fprintf(stderr,"ELECTRO-F-INVRSINT Error in matrix inversion, NSWC code %d\n",ierr);
       return;
     }
 
@@ -1408,7 +1408,7 @@ void c_solve_linear(int *n, COMPLEX *a, COMPLEX *b,
   if (ierr != 0) 
     {
       (*status) = FAIL;
-      fprintf(stderr,"ELECTRO-F-LININT Error in solution of linear system, NSWC code %ld\n",ierr);
+      fprintf(stderr,"ELECTRO-F-LININT Error in solution of linear system, NSWC code %d\n",ierr);
       return;
     }
 
@@ -1623,7 +1623,7 @@ void d_c_solve_linear(int *n,DOUBLE_COMPLEX *a,DOUBLE_COMPLEX *b,
   if (ierr != 0) 
     {
       (*status) = FAIL;
-      fprintf(stderr,"ELECTRO-F-LININT Error in solution of linear system, NSWC code %ld",ierr);
+      fprintf(stderr,"ELECTRO-F-LININT Error in solution of linear system, NSWC code %d",ierr);
       return;
     }
 
@@ -1865,7 +1865,7 @@ void d_c_solve_linear(int *n,DOUBLE_COMPLEX *a,DOUBLE_COMPLEX *b,
 // 
 // 	{
 // 	  (*status) = FAIL;
-//	  fprintf(stderr,"ELECTRO-F-NONLININT Error in solution of nonlinear system, NSWC code %ld\n",info);
+//	  fprintf(stderr,"ELECTRO-F-NONLININT Error in solution of nonlinear system, NSWC code %d\n",info);
 // 	  return;
 // 	}
 //     }
@@ -1941,7 +1941,7 @@ void lu_factor(int *n, float *a, float *lu, int *lda,
     if (info != 0)   
     {
       (*status) = FAIL;
-      fprintf(stderr,"ELECTRO-F-LUFACT Error in LU factorization of matrix, NSWC code %ld\n",info);
+      fprintf(stderr,"ELECTRO-F-LUFACT Error in LU factorization of matrix, NSWC code %d\n",info);
       return;
     }
 
@@ -2103,7 +2103,7 @@ void dlu_factor(int *n, double *a, double *lu, int *lda,
     if (info != 0)   
     {
       (*status) = FAIL;
-      fprintf(stderr,"ELECTRO-F-LUFACT Error in LU factorization of matrix, NSWC code %ld\n",status);
+      fprintf(stderr,"ELECTRO-F-LUFACT Error in LU factorization of matrix, NSWC code %d\n", *status);
       return;
     }
 

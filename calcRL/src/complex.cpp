@@ -231,9 +231,9 @@ Complex log(const Complex& c) {
  
   switch(cs) {
  
-   case 1:  cerr << "Problem with log !!!" << endl; com = 0.0; break;
+   case 1:  std::cerr << "Problem with log !!!" << std::endl; com = 0.0; break;
    case 2:  com = cmplx(log(cabs(c)),arg(c));  break;
-   default: cerr << "Should nevere get here!" << "\n";
+   default: std::cerr << "Should nevere get here!" << "\n";
   }
 
   return(com);
@@ -303,13 +303,13 @@ Complex pow(const double& y, const Complex& c) {
   return(exp(c*log(y)));   
 }    
      
-istream& operator>>(istream& in, Complex& c) {
+std::istream& operator>>(std::istream& in, Complex& c) {
  
   in >> c.re >> c.im;
   return(in);
 }  
 
-ostream& operator<<(ostream& out, Complex& c) {
+std::ostream& operator<<(std::ostream& out, Complex& c) {
  
   out << " ( " << c.re << ',' << " " << c.im << " )";
   return(out);

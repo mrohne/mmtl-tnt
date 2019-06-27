@@ -44,7 +44,7 @@ double ber(double x) {
       32.36345652*r4 + 2.64191397*r5 - 
       0.08349609*r6 +  0.00122552*r7 - 0.00000901*r7*r2;
   } else {
-    cerr << "Ber function error" << endl;
+    std::cerr << "Ber function error" << std::endl;
   }
   return (ber);
 }
@@ -78,7 +78,7 @@ double bei(double x) {
       10.56765779*r4 + 0.52185615*r5 - 0.01103667*r6 + 
       0.00011346*r6*tp;
   } else {
-    cerr << "Bei function error" << endl;
+    std::cerr << "Bei function error" << std::endl;
   }
   return(bei);
 
@@ -89,7 +89,7 @@ double ker(double x) {
   double ker,c1;
 
   if(x <= 0.0) {
-    cerr << "Ker function error" << endl;
+    std::cerr << "Ker function error" << std::endl;
   } else if(x <= 8.0) {
     double x8,c1;  // ,p1,p2,p3,p4,p5,p6,p7,p8;
     double r2, r3, r4, r5, r6, r7;
@@ -137,7 +137,7 @@ double kei( double x ) {
   
 
   if(x <= 0.0) {
-    cerr << "Kei function error" << endl;
+    std::cerr << "Kei function error" << std::endl;
   } else if (x <= 8.0) { 
     double x8;  // ,p1,p2,p3,p4,p5,p6,p7;
     double tp, r1, r2, r3, r4, r5, r6;
@@ -203,7 +203,7 @@ double berp(double x) {
 	      0.66047849*r4 - 0.02609253*r5 + 
 	      0.00045957*r6 - 0.00000394*r6*tp);
   } else {
-    cerr << "Berp function error." << endl;
+    std::cerr << "Berp function error." << std::endl;
   }
 
   return(berp);
@@ -237,7 +237,7 @@ double beip(double x) {
 	      2.31167514*r4 + 0.14677204*r5 - 0.00379386*r6 + 
 	      0.00004609*r6*r2);
   } else {
-    cerr << "Beip function error" << endl;
+    std::cerr << "Beip function error" << std::endl;
   }
 
   return(beip);
@@ -248,7 +248,7 @@ double kerp(double x) {
   double kerp,c1;
 
   if(x <= 0.0) {
-    cerr << "Kerp function error" << endl;
+    std::cerr << "Kerp function error" << std::endl;
   } else if(x <= 8.0) {
     double x8,c1,c2;  // ,p1,p2,p3,p4,p5,p6,p7;
     double r1, tp, r2, r3, r4, r5, r6;
@@ -294,7 +294,7 @@ double keip(double x) {
 
 
   if(x <= 0.0) {
-    cerr << "Keip function error" << endl;
+    std::cerr << "Keip function error" << std::endl;
   } else if(x <= 8.0) {
     double x8,c2;  // ,p1,p2,p3,p4,p5,p6,p7;
     double r2, r3, r4, r5, r6;
@@ -354,7 +354,7 @@ Complex seta(double x) {
   Complex seta;
 
   if(x == 0.0) {
-    cerr << "Seta function error" << endl;
+    std::cerr << "Seta function error" << std::endl;
   } else {
     double x8, r3, r4, r5, r6;
 
@@ -376,7 +376,7 @@ Complex dphi(double x) {
   Complex dphi;
   
   if(x == 0.0) {
-    cerr << "dphi function error" << endl;
+    std::cerr << "dphi function error" << std::endl;
   } else {
     double x8, r3, r4, r5, r6;
 
