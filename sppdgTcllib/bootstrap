@@ -23,6 +23,6 @@ echo "Bootstrapping subdirectories of " `pwd`
 for i in */bootstrap ; do
     echo bootstrapping $i
     cd `dirname $i`
-    bootstrap
+    sh bootstrap
     cd ..
 done
