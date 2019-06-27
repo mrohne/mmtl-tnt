@@ -97,7 +97,7 @@ itcl::class Welement {
     private method computeLosses { }
 
     #  HLCSDL - Stackup Structures
-    method visitStackup { stackup x y }
+    method visitStackup { stackup args }
     method visitGroundPlane { groundPlane x y }
     method visitDielectricLayer { dielectricLayer x y }
     method visitRectangleDielectric { rectangleDielectric x y }
@@ -455,7 +455,7 @@ itcl::body Welement::computeLosses { } {
     #  Visit the layer stackup to capture conductor
     #  areas and conductivities
     #--------------------------------------------------------------
-    ::Stackup::accept $this 0 0
+    ::Stackup::accept $this 0
 
     #--------------------------------------------------------------
     #  Capture length units from stackup for conversion to SI
@@ -612,7 +612,7 @@ Command Line Swtiches
 
 #  HLCSDL - Stackup Structures
 
-itcl::body Welement::visitStackup { stackup x y } {
+itcl::body Welement::visitStackup { stackup args } {
     foreach struct $Stackup::structureList {
 	$struct accept $this 0 0
     }

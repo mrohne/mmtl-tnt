@@ -68,7 +68,9 @@ itcl::class HLCSDLstructure {
 	$visitor visit$myClass $this $x $y
 
 	#  Navigate to the structure(s)
-	$structure accept $visitor $x $y
+	set x0 [expr {[length $x] + [length $xOffset]}]
+	set y0 [expr {[length $y] + [length $yOffset]}]
+	$structure accept $visitor $x0 $y0
     }
 }
 
@@ -165,7 +167,7 @@ itcl::class RectangleDielectric {
 
 	for {set i 0} {$i<$number} {incr i} {
 	    set x0 [expr {[length $xOffset] + [length $pitch]*$i}]
-	    set y0 [expr { [length $yOffset] }]
+	    set y0 [expr {[length $yOffset]}]
 	    lappend structure [Dielectric ${this}_#auto \
 		-permittivity $permittivity -permeability $permeability \
 		-x $x0 -y $y0 -lossTangent $lossTangent -shape $shape ]
@@ -580,7 +582,7 @@ itcl::class Stackup {
     public common frequency 1e9
     public common defaultLengthUnits ""
     proc width {} {
-	set max 0
+	set max 0.0
 	foreach s $structureList {
 	    set w [$s width]
 	    if {$w > $max} {
@@ -590,7 +592,7 @@ itcl::class Stackup {
 	return $max
     }
     proc height { } {
-	set h 0
+	set h 0.0
 	#  Add up the heights of the Layers
 	foreach struct $structureList {
 	    if {[$struct isa GroundPlane] || [$struct isa DielectricLayer]} {
@@ -606,7 +608,7 @@ itcl::class Stackup {
     }
 
     proc accept { visitor args } {
-	eval $visitor visitStackup ::Stackup $args
+	$visitor visitStackup ::Stackup $args
     }
 }
 

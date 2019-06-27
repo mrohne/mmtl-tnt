@@ -72,7 +72,7 @@ namespace eval ::gui:: {
 # Dielectric variables
 ######################################
     variable _dname
-    variable _thickness    0
+    variable _thickness    0.0
     variable _permittivity 1.0
     variable _permeability 1.0
     variable _lossTangent  0.0
@@ -84,48 +84,48 @@ namespace eval ::gui:: {
     variable _dpermittivity 1.0
     variable _dpermeability 1.0
     variable _dlossTangent  0.0
-    variable _dwidth        1
-    variable _dheight       1
-    variable _dnumber       1
-    variable _dpitch        0
-    variable _dxoffset      0
-    variable _dyoffset      0
+    variable _dwidth        1.0
+    variable _dheight       1.0
+    variable _dnumber       1.0
+    variable _dpitch        0.0
+    variable _dxoffset      0.0
+    variable _dyoffset      0.0
 
 ######################################
 # Rectangular conductor variables
 ######################################
     variable _rname
     variable _rconductivity copper
-    variable _rwidth        1
-    variable _rheight       1
-    variable _rnumber       1
-    variable _rpitch        0
-    variable _rxoffset      0
-    variable _ryoffset      0
+    variable _rwidth        1.0
+    variable _rheight       1.0
+    variable _rnumber       1.0
+    variable _rpitch        0.0
+    variable _rxoffset      0.0
+    variable _ryoffset      0.0
 
 ######################################
 # Circular conductor variables
 ######################################
     variable _cname
     variable _cconductivity copper
-    variable _cdiameter     1
-    variable _cnumber       1
-    variable _cpitch        0
-    variable _cxoffset      0
-    variable _cyoffset      0
+    variable _cdiameter     1.0
+    variable _cnumber       1.0
+    variable _cpitch        0.0
+    variable _cxoffset      0.0
+    variable _cyoffset      0.0
 
 ######################################
 # Trapezoidal conductor variables
 ######################################
     variable _tname
     variable _tconductivity copper
-    variable _ttopwidth     1
-    variable _tbotwidth     1
-    variable _theight       1
-    variable _tnumber       1
-    variable _tpitch        0
-    variable _txoffset      0
-    variable _tyoffset      0
+    variable _ttopwidth     1.0
+    variable _tbotwidth     1.0
+    variable _theight       1.0
+    variable _tnumber       1.0
+    variable _tpitch        0.0
+    variable _txoffset      0.0
+    variable _tyoffset      0.0
 
 ######################################
 # Counter for ground-plane
