@@ -77,6 +77,14 @@ case "${host}" in
 	#  Let autoconf pick the right compilers by itself
 	AM_CXXFLAGS="-DFORTRAN_UNDERBARS"
 ;;
+*darwin*)
+	#  For Linux, all flavors...
+	#  Use the GNU compilers for C++ and FORTRAN.
+	CXX="g++"
+	F77="gfortran"
+	AM_CXXFLAGS="-DFORTRAN_UNDERBARS"
+	AM_FFLAGS="-arch x86_64"
+;;
 esac
 AC_SUBST(AM_CXXFLAGS)
 AC_SUBST(AM_FFLAGS)
@@ -97,6 +105,7 @@ AC_SUBST(AM_FFLAGS)
 #----------------------------------------------------------------
 AC_PROG_CXX
 AC_PROG_F77
+AC_F77_LIBRARY_LDFLAGS
 
 #----------------------------------------------------------------
 # Checks for header files.
