@@ -18,7 +18,7 @@
 #----------------------------------------------------------------
 
 #----------------------------------------------------------------
-#  Just for the record, this isn't a GNU project, and
+#  Just for the record, this isn't a GNU project, and 
 #  doesn't have all the support files like LICENSE and
 #  ChangeLog.  We're also compiling in a subdirectory, so
 #  we supply a couple of options to automake.
@@ -33,26 +33,26 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 #---------------------------------------------------------------
 #  Only one script that needs to be installed.
 #---------------------------------------------------------------
-pkglibexec_SCRIPTS = \
+pkglib_SCRIPTS = \
 	pkgIndex.tcl
 
 #---------------------------------------------------------------
 #  Define an installation directory.
 #
 #  Normal libraries would get something like
-#     pkglibexecdir=$(libexecdir)/$(PACKAGE)$(PACKAGE_VERSION)
+#     pkglibdir=$(libdir)/$(PACKAGE)$(PACKAGE_VERSION)
 #  which would put a nicely named and versioned library
-#  into $(prefix)/libexec.
+#  into $(prefix)/lib.
 #
 #  But sppdgTcllib is really just a container library,
 #  and SUBDIRS are supposed to go into a subdirectory
 #  of sppdgTcllib.  So our configure.ac changes
-#  $(libexecdir) to point to the installed sppdgTcllib,
+#  $(libdir) to point to the installed sppdgTcllib,
 #  so that SUBDIRS will go in the right place.
 #
-#  Thus, our pkglibexecdir becomes...
+#  Thus, our pkglibdir becomes...
 #---------------------------------------------------------------
-pkglibexecdir = $(libexecdir)/$(PACKAGE)$(PACKAGE_VERSION)
+pkglibdir = $(prefix)/lib/$(PACKAGE)$(PACKAGE_VERSION)
 
 
 #---------------------------------------------------------------
@@ -60,4 +60,4 @@ pkglibexecdir = $(libexecdir)/$(PACKAGE)$(PACKAGE_VERSION)
 #---------------------------------------------------------------
 SUBDIRS = console getFilePreview sgraph addressDialog
 
-AM_MAKEFLAGS = "libexecdir=$(pkglibexecdir)"
+AM_MAKEFLAGS = "libdir=$(pkglibdir)"

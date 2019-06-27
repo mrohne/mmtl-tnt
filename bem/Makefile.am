@@ -16,7 +16,7 @@
 #----------------------------------------------------------------
 
 #----------------------------------------------------------------
-#  Just for the record, this isn't a GNU project, and
+#  Just for the record, this isn't a GNU project, and 
 #  doesn't have all the support files like LICENSE and
 #  ChangeLog.  We're also compiling in a subdirectory, so
 #  we supply a couple of options to automake.
@@ -26,12 +26,12 @@
 #  autoconf, and automake for the first time, you'll need to
 #  supply command line switches --add-missing --copy.
 #----------------------------------------------------------------
-AUTOMAKE_OPTIONS = foreign subdir-objects
+AUTOMAKE_OPTIONS = foreign # subdir-objects
 
 #---------------------------------------------------------------
 # tcl/tk scripts that may need to be installed.
 #---------------------------------------------------------------
-pkglibexec_SCRIPTS = \
+pkglib_SCRIPTS = \
         lib/bem.tcl \
 	lib/bem_gpge.itcl \
         lib/bem_graphs.itcl \
@@ -46,7 +46,7 @@ pkglibexec_SCRIPTS = \
 #  Define an installation directory that includes
 #  the version number (from AC_INIT) like "bltmath1.0"
 #---------------------------------------------------------------
-pkglibexecdir = $(libexecdir)/$(PACKAGE)$(PACKAGE_VERSION)
+pkglibdir = $(libdir)/$(PACKAGE)$(PACKAGE_VERSION)
 
 #----------------------------------------------------------------
 #  nmmtl is our main target
@@ -54,9 +54,9 @@ pkglibexecdir = $(libexecdir)/$(PACKAGE)$(PACKAGE_VERSION)
 bin_PROGRAMS = bem
 
 #----------------------------------------------------------------
-#  The old "New MMTL", named nmmtl, reads old-fashioned MagiCAD
-#  GPGE graphics files instead of the newer cross section
-#  descriptions.
+#  The old "New MMTL", named nmmtl, reads old-fashioned MagiCAD 
+#  GPGE graphics files instead of the newer cross section 
+#  descriptions.  
 #  Build nmmtl just for testing - don't install it.
 #----------------------------------------------------------------
 noinst_PROGRAMS = nmmtl
@@ -71,9 +71,11 @@ bem_TESTS = tests/test_bem.tcl
 #----------------------------------------------------------------
 bem_SOURCES = $(cpp_SOURCES) $(fortran_SOURCES) \
 		src/nmmtl_parse_xsctn.cpp
+bem_LDADD = @FLIBS@
 
 nmmtl_SOURCES = $(cpp_SOURCES) $(fortran_SOURCES) \
 		src/nmmtl_parse_graphic.cpp
+nmmtl_LDADD = @FLIBS@
 
 
 #----------------------------------------------------------------
@@ -197,3 +199,17 @@ fortran_SOURCES = \
 	src/ipmpar.F \
 	src/cswap.F \
 	src/dpmpar.F
+
+
+
+
+
+
+
+
+
+
+
+
+
+

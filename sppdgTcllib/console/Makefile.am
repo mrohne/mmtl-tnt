@@ -18,7 +18,7 @@
 #----------------------------------------------------------------
 
 #----------------------------------------------------------------
-#  Just for the record, this isn't a GNU project, and
+#  Just for the record, this isn't a GNU project, and 
 #  doesn't have all the support files like LICENSE and
 #  ChangeLog.  We're also compiling in a subdirectory, so
 #  we supply a couple of options to automake.
@@ -33,18 +33,19 @@ AUTOMAKE_OPTIONS = foreign
 #---------------------------------------------------------------
 # tcl/tk scripts that may need to be installed.
 #---------------------------------------------------------------
-pkglibexec_SCRIPTS = \
+pkglib_SCRIPTS = \
 	console.tcl \
 	console_demo.tcl \
 	tkcon.tcl \
 	pkgIndex.tcl
 
-pkgdata_DATA = \
+pkglib_DATA = \
 	README
 
 #---------------------------------------------------------------
 #  Define an installation directory that includes
 #  the version number (from AC_INIT) like "console1.0"
 #---------------------------------------------------------------
-pkgdatadir = $(datadir)/$(PACKAGE)$(PACKAGE_VERSION)
-pkglibexecdir = $(libexecdir)/$(PACKAGE)$(PACKAGE_VERSION)
+pkglibdir = $(libdir)/$(PACKAGE)$(PACKAGE_VERSION)
+
+
