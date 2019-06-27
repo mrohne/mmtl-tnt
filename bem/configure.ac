@@ -20,7 +20,7 @@
 #  Declare the package name and version.
 #  All the bouquets and brickbats go to Sharon. :-)
 #----------------------------------------------------------------
-AC_INIT([BEM],[1.0],[zahn.sharon@mayo.edu])
+AC_INIT(BEM, 1.0, zahn.sharon@mayo.edu)
 
 #----------------------------------------------------------------
 #  Give autoconf a point of reference, and tell it that
@@ -74,8 +74,18 @@ case "${host}" in
 ;;
 *linux*)
 	#  For Linux, all flavors...
-	#  Let autoconf pick the right compilers by itself
+	#  Use the GNU compilers for C++ and FORTRAN.
+	CXX="g++"
+	F77="g77"
 	AM_CXXFLAGS="-DFORTRAN_UNDERBARS"
+;;
+*darwin*)
+	#  For Linux, all flavors...
+	#  Use the GNU compilers for C++ and FORTRAN.
+	CXX="g++"
+	F77="gfortran"
+	AM_CXXFLAGS="-DFORTRAN_UNDERBARS"
+	AM_FFLAGS="-arch x86_64"
 ;;
 esac
 AC_SUBST(AM_CXXFLAGS)
@@ -97,6 +107,7 @@ AC_SUBST(AM_FFLAGS)
 #----------------------------------------------------------------
 AC_PROG_CXX
 AC_PROG_F77
+AC_F77_LIBRARY_LDFLAGS
 
 #----------------------------------------------------------------
 # Checks for header files.

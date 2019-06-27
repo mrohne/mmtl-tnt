@@ -16,7 +16,7 @@
 #----------------------------------------------------------------
 
 #----------------------------------------------------------------
-#  Just for the record, this isn't a GNU project, and
+#  Just for the record, this isn't a GNU project, and 
 #  doesn't have all the support files like LICENSE and
 #  ChangeLog.  We're also compiling in a subdirectory, so
 #  we supply a couple of options to automake.
@@ -31,11 +31,11 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 #---------------------------------------------------------------
 # tcl/tk scripts that may need to be installed.
 #---------------------------------------------------------------
-pkglibexec_SCRIPTS = \
+pkglib_SCRIPTS = \
 	lib/calcRL.tcl \
 	lib/calcRL_exe.tcl \
 	lib/pkgIndex.tcl
-
+ 
 #----------------------------------------------------------------
 #  nmmtl is our main target
 #----------------------------------------------------------------
@@ -69,3 +69,12 @@ src/gauleg.cpp \
 src/kelvin.cpp \
 src/sparse.cpp \
 src/vector.cpp
+
+
+
+
+
+
+
+
+

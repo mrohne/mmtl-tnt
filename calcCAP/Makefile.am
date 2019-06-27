@@ -15,7 +15,7 @@
 #----------------------------------------------------------------
 
 #----------------------------------------------------------------
-#  Just for the record, this isn't a GNU project, and
+#  Just for the record, this isn't a GNU project, and 
 #  doesn't have all the support files like LICENSE and
 #  ChangeLog.  We're also compiling in a subdirectory, so
 #  we supply a couple of options to automake.
@@ -30,7 +30,7 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 #---------------------------------------------------------------
 # tcl/tk scripts that may need to be installed.
 #---------------------------------------------------------------
-pkglibexec_SCRIPTS = \
+pkglib_SCRIPTS = \
 	lib/calcCAP_exe.tcl  \
 	lib/calcCAP.tcl \
 	lib/epl.bit \
@@ -70,3 +70,12 @@ src/sparse.cpp \
 src/stdafx.cpp \
 src/systsolv.cpp \
 src/vector.cpp
+
+
+
+
+
+
+
+
+
