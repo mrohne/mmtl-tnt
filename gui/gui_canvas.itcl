@@ -175,7 +175,7 @@ itcl::body canvasDraw::visitStackup { stackup widget } {
     }
     set minThickness [expr {$minHeight * 0.75}]
 
-    set y0 0
+    set y0 0.0
     foreach struct $structureList {
 	if {[$struct isa GroundPlane] || [$struct isa DielectricLayer]} {
 	    if { [$struct height] > 0.0 } {
@@ -189,16 +189,15 @@ itcl::body canvasDraw::visitStackup { stackup widget } {
 	set totalWidth $y0
     }
 
-##    set xOffsetLayer [expr {$totalWidth / 2.0}]
     set totalWidth [expr { $totalWidth * 2 }]
     set xOffsetLayer [expr { ($totalWidth - $condWidth) * 0.5}]
     set totalHeight $y0
 
     #  Draw all the cross section elements.  Increment "y0" 
     #  for ground and dielectric layers.
-    set y0 0
+    set y0 0.0
     foreach struct $structureList {
-	$struct accept $this 0 $y0
+	$struct accept $this 0.0 $y0
 	if {[$struct isa GroundPlane] || [$struct isa DielectricLayer]} {
 	    if { [$struct height] > 0.0 } {
 		set y0 [expr {$y0 + [$struct height]}]
@@ -211,9 +210,9 @@ itcl::body canvasDraw::visitStackup { stackup widget } {
     # Mark the origin of the drawing.
     set xyP [expr { $minHeight * 0.25 } ]
     set xyN [expr { $xyP * -1 } ]
-    $canvas create line $xyN $xyN $xyP $xyP \
+    $canvas create line $xyN 0.0 $xyP 0.0 \
 	    -tag annotation
-    $canvas create line $xyN $xyP $xyP $xyN \
+    $canvas create line 0.0 $xyN 0.0 $xyP \
 	    -tag annotation
     #  Arrange the canvas items so that layers are on the bottom,
     #  then rectangles (which might be dielectric rectangles),
@@ -440,7 +439,7 @@ itcl::body canvasDraw::annotatePitchOffsets { x y width height pitch atags } {
 	    -arrow both -tag $atags
     $canvas create text $xcenter $ycenter \
 	    -anchor s -text $pitch -tag $atags
-    if { $xoff > 0 } {
+    if { $xoff > 0.0 } {
 	set x1 [length $x]
 	set x0 [expr { $x1 - $xoff }]
 	set ycenter [expr { [length $y] - $yoff }]
@@ -450,7 +449,7 @@ itcl::body canvasDraw::annotatePitchOffsets { x y width height pitch atags } {
 	$canvas create text $xcenter $ycenter \
 		-anchor n -text $xoff -tag $atags
     }
-    if { $yoff > 0 } {
+    if { $yoff > 0.0 } {
 	set xcenter [length $x]
 	set y1 [length $y]
 	set y0 [expr { $y1 - $yoff }]

@@ -27,6 +27,37 @@ package provide gui 2.0
 ##################################################################
 proc ::gui::guiCreateElements { nb {mmtlInterface 1} } {
 
+
+    #----------------------------------------------------
+    # Read in the material - value lists for conductivity,
+    # loss-tangent and permittivity.
+    #----------------------------------------------------
+    ::gui::_readMaterialList "Read Conductivity List" ::gui::_cValList 0 \
+	    [file join $::gui::scriptDir conductivity.list]
+    ::gui::_readMaterialList "Read lossTangent List" ::gui::_ltValList 0 \
+	    [file join $::gui::scriptDir loss_tangent.list]
+    ::gui::_readMaterialList "Read Permittivity List" ::gui::_pValList 0 \
+	    [file join $::gui::scriptDir permittivity.list]
+
+    #  _pValList is actually an array.  Lets copy the values
+    #  into a proper list.
+    set  ::gui::_permittivityList [list]
+    foreach { name value } [ array get ::gui::_pValList ] {
+	lappend ::gui::_permittivityList "$name $value"
+    }
+    #  _ltValList is actually an array.  Lets copy the values
+    #  into a proper list.
+    set  ::gui::_losstangentList [list]
+    foreach { name value } [ array get ::gui::_ltValList ] {
+	lappend ::gui::_losstangentList "$name $value"
+    }
+    #  _cValList is actually an array.  Lets copy the values
+    #  into a proper list.
+    set  ::gui::_conductivityList [list]
+    foreach { name value } [ array get ::gui::_cValList ] {
+	lappend ::gui::_conductivityList "$name $value"
+    }
+
     #------------------------------------------------------
     #  Create and populate the three main frames
     #  of the user interface:  title, control, and canvas.
@@ -89,36 +120,6 @@ proc ::gui::guiCreateElements { nb {mmtlInterface 1} } {
 	grid columnconfigure $f 2 -weight 1
 	grid    rowconfigure $f 1 -weight 1
 
-    }
-
-    #----------------------------------------------------
-    # Read in the material - value lists for conductivity,
-    # loss-tangent and permittivity.
-    #----------------------------------------------------
-    ::gui::_readMaterialList "Read Conductivity List" ::gui::_cValList 0 \
-	    [file join $::gui::scriptDir conductivity.list]
-    ::gui::_readMaterialList "Read lossTangent List" ::gui::_ltValList 0 \
-	    [file join $::gui::scriptDir loss_tangent.list]
-    ::gui::_readMaterialList "Read Permittivity List" ::gui::_pValList 0 \
-	    [file join $::gui::scriptDir permittivity.list]
-
-    #  _pValList is actually an array.  Lets copy the values
-    #  into a proper list.
-    set  ::gui::_permittivityList [list]
-    foreach { name value } [ array get ::gui::_pValList ] {
-	lappend ::gui::_permittivityList "$name $value"
-    }
-    #  _ltValList is actually an array.  Lets copy the values
-    #  into a proper list.
-    set  ::gui::_losstangentList [list]
-    foreach { name value } [ array get ::gui::_ltValList ] {
-	lappend ::gui::_losstangentList "$name $value"
-    }
-    #  _cValList is actually an array.  Lets copy the values
-    #  into a proper list.
-    set  ::gui::_conductivityList [list]
-    foreach { name value } [ array get ::gui::_cValList ] {
-	lappend ::gui::_conductivityList "$name $value"
     }
 
     return $f
@@ -324,8 +325,31 @@ proc ::gui::_createTitleframeElements { parent } {
 		     -values {mils microns inches meters} \
 		     -textvariable ::Stackup::defaultLengthUnits \
 		     -modifycmd ::gui::_setDefaultUnits ]
-
     grid $ltitle $etitle $lunits $cbunits -sticky ew -padx 4 -pady 4
+
+    
+    #--------------------------------------------------------------
+    # Default dielectric constants
+    #--------------------------------------------------------------
+    set lpermitt [label $f.lpermitt -text "Permittivity"]
+    set cbpermitt [ComboBox $f.cbpermitt -width 10 \
+		       -values $::gui::_permittivityList \
+		       -textvariable ::gui::_permittivity]
+    set llosstan [label $f.llosstan -text "Loss Tangent"]
+    set cblosstan [ComboBox $f.cblosstan -width 10 \
+		       -values $::gui::_losstangentList \
+		       -textvariable ::gui::_lossTangent]
+    grid $lpermitt $cbpermitt $llosstan $cblosstan -sticky ew -padx 4 -pady 4
+
+    #--------------------------------------------------------------
+    # Default conductor constants
+    #--------------------------------------------------------------
+    set lconduct [label $f.lconduct -text "Conductivity"]
+    set cbconduct [ComboBox $f.cbconduct -width 10 \
+		       -values $::gui::_conductivityList \
+		       -textvariable ::gui::_conductivity]
+    grid $lconduct $cbconduct -sticky ew -padx 4 -pady 4
+
     grid columnconfigure $f 1 -weight 1
 
 
@@ -467,22 +491,19 @@ proc ::gui::_createStructureDialog { type } {
 
     if { [info exists complexAttributes(permittivity)] } {
 	set lpermitt [label $w.lpermitt -text "Permittivity"]
-	set cbpermitt [ComboBox $w.cbpermitt -width 10 \
-			     -values $::gui::_permittivityList \
-			     -textvariable ::gui::dialog($type,permittivity)]
+	set epermitt [entry $w.epermitt -width 10 \
+			   -textvariable ::gui::dialog($type,permittivity)]
     }
 
     if { [info exists complexAttributes(lossTangent)] } {
 	set llosstan [label $w.llosstan -text "Loss Tangent"]
-	set cblosstan [ComboBox $w.cblosstan -width 10 \
-			       -values $::gui::_losstangentList \
-			       -textvariable ::gui::dialog($type,lossTangent)]
+	set elosstan [entry $w.elosstan -width 10 \
+			   -textvariable ::gui::dialog($type,lossTangent)]
     }
 
     if { [info exists complexAttributes(conductivity)] } {
 	set lconduct [label $w.lconduct -text "Conductivity"]
-	set cbconduct [ComboBox $w.cbconduct -width 10 \
-			   -values $::gui::_conductivityList \
+	set econduct [entry $w.econduct -width 10 \
 			   -textvariable ::gui::dialog($type,conductivity)]
     }
 
@@ -511,49 +532,43 @@ proc ::gui::_createStructureDialog { type } {
 
 	DielectricLayer {
 	    grid $lname      $ename - -      -sticky ew -padx 4 -pady 4
-	    grid $lpermitt   $cbpermitt $lpermeability $epermeability \
+	    grid $lpermitt   $epermitt $lpermeability $epermeability \
 		-sticky ew -padx 4 -pady 4
-	    grid $llosstan   $cblosstan      -sticky ew -padx 4 -pady 4
+	    grid $llosstan   $elosstan      -sticky ew -padx 4 -pady 4
 	    grid $lthickness $ethickness     -sticky ew -padx 4 -pady 4
 
-	    grid $lname $lpermitt $lpermeability \
-		$llosstan $lthickness -sticky e
-	    foreach e [list $ename $cbpermitt $epermeability \
-			   $cblosstan $ethickness ] {
+	    foreach e [list $ename $epermitt $epermeability \
+			   $elosstan $ethickness ] {
 		raise $e
 	    }
 	}
 
 	RectangleDielectric {
 	    grid $lname     $ename - -       -sticky ew -padx 4 -pady 4
-	    grid $lpermitt $cbpermitt $lpermeability $epermeability \
+	    grid $lpermitt $epermitt $lpermeability $epermeability \
 		                              -sticky ew -padx 4 -pady 4
-	    grid $llosstan  $cblosstan        -sticky ew -padx 4 -pady 4
+	    grid $llosstan  $elosstan        -sticky ew -padx 4 -pady 4
 	    grid $lwidth    $ewidth           -sticky ew -padx 4 -pady 4
 	    grid $lheight   $eheight          -sticky ew -padx 4 -pady 4
 	    grid $lxOffset $exOffset $lyOffset $eyOffset \
 		                              -sticky ew -padx 4 -pady 4
-	    grid $lname $lpermitt $lpermeability $llosstan \
-		$lwidth $lheight $lxOffset $lyOffset \
-		-sticky e
-	    foreach e [list $ename $cbpermitt $epermeability \
-			   $cblosstan $ewidth $eheight $exOffset $eyOffset] {
+	    foreach e [list $ename $epermitt $epermeability \
+			   $elosstan $ewidth $eheight $exOffset $eyOffset] {
 		raise $e
 	    }
 	}
 
 	RectangleConductors {
 	    grid $lname    $ename - -             -sticky ew -padx 4 -pady 4
-	    grid $lconduct $cbconduct - -         -sticky ew -padx 4 -pady 4
+	    grid $lconduct $econduct - -         -sticky ew -padx 4 -pady 4
 	    grid $lwidth   $ewidth    $lnumber  $snumber  \
 		                                  -sticky ew -padx 4 -pady 4
 	    grid $lheight  $eheight   $lpitch   $epitch \
 		                                  -sticky ew -padx 4 -pady 4
 	    grid $lxOffset $exOffset  $lyOffset $eyOffset \
 		                                  -sticky ew -padx 4 -pady 4
-	    grid $lname $lconduct $lwidth $lheight $lnumber $lpitch \
-		$lxOffset $lyOffset -sticky e
-	    foreach e [list $ename $cbconduct $ewidth $snumber \
+
+	    foreach e [list $ename $econduct $ewidth $snumber \
 			   $eheight $epitch $exOffset $eyOffset] {
 		raise $e
 	    }
@@ -561,7 +576,7 @@ proc ::gui::_createStructureDialog { type } {
 
 	TrapezoidConductors {
 	    grid $lname        $ename - -         -sticky ew -padx 4 -pady 4
-	    grid $lconduct     $cbconduct - -     -sticky ew -padx 4 -pady 4
+	    grid $lconduct     $econduct - -     -sticky ew -padx 4 -pady 4
 	    grid $ltopWidth    $etopWidth         -sticky ew -padx 4 -pady 4
 	    grid $lbottomWidth $ebottomWidth    $lnumber  $snumber  \
 		                                  -sticky ew -padx 4 -pady 4
@@ -569,9 +584,8 @@ proc ::gui::_createStructureDialog { type } {
 		                                  -sticky ew -padx 4 -pady 4
 	    grid $lxOffset     $exOffset  $lyOffset $eyOffset \
 		                                  -sticky ew -padx 4 -pady 4
-	    grid $lname $lconduct $ltopWidth $lbottomWidth $lheight \
-		$lnumber $lpitch $lxOffset $lyOffset -sticky e
-	    foreach e [list $ename $cbconduct $etopWidth $ebottomWidth \
+
+	    foreach e [list $ename $econduct $etopWidth $ebottomWidth \
 			   $snumber $eheight $epitch $exOffset $eyOffset] {
 		raise $e
 	    }
@@ -579,16 +593,15 @@ proc ::gui::_createStructureDialog { type } {
 
 	CircleConductors {
 	    grid $lname     $ename - -            -sticky ew -padx 4 -pady 4
-	    grid $lconduct  $cbconduct - -        -sticky ew -padx 4 -pady 4
+	    grid $lconduct  $econduct - -        -sticky ew -padx 4 -pady 4
 	    grid $ldiameter $ediameter $lnumber  $snumber  \
 		                                  -sticky ew -padx 4 -pady 4
 	    grid    x           x      $lpitch   $epitch \
 		                                  -sticky ew -padx 4 -pady 4
 	    grid $lxOffset $exOffset  $lyOffset $eyOffset \
 		                                  -sticky ew -padx 4 -pady 4
-	    grid $lname $lconduct $ldiameter $lnumber $lpitch \
-		$lxOffset $lyOffset -sticky e
-	    foreach e [list $ename $cbconduct $ediameter $snumber \
+
+	    foreach e [list $ename $econduct $ediameter $snumber \
 			   $epitch $exOffset $eyOffset] {
 		raise $e
 	    }
